@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['vessel',['Vessel',['../classschedule_1_1Vessel.html',1,'schedule']]]
+  ['schedule',['Schedule',['../classschedule_1_1Schedule.html',1,'schedule']]]
 ];

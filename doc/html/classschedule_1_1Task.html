@@ -61,6 +61,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="annotated.html"><span>Class&#160;List</span></a></li>
       <li><a href="classes.html"><span>Class&#160;Index</span></a></li>
+      <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
 <!-- window showing the filter options -->
@@ -68,7 +69,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -85,6 +86,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="#pub-static-attribs">Static Public Attributes</a> &#124;
 <a href="classschedule_1_1Task-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -97,21 +99,64 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a6ccbfa1da1a89caa9028d18add1c2a5c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6ccbfa1da1a89caa9028d18add1c2a5c"></a>
 def&#160;</td><td class="memItemRight" valign="bottom"><b>__init__</b></td></tr>
 <tr class="separator:a6ccbfa1da1a89caa9028d18add1c2a5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a710588125ef7265d993a3717f76388fb"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classschedule_1_1Task.html#a710588125ef7265d993a3717f76388fb">setDate</a></td></tr>
+<tr class="separator:a710588125ef7265d993a3717f76388fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a44e751572e1104bb5ea43296253751f1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a44e751572e1104bb5ea43296253751f1"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>date</b></td></tr>
+<tr class="separator:a44e751572e1104bb5ea43296253751f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
 <tr class="memitem:a2ae4b72edd9106d6133cae8751785324"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2ae4b72edd9106d6133cae8751785324"></a>
 string&#160;</td><td class="memItemRight" valign="bottom"><b>name</b> = &quot;&quot;</td></tr>
 <tr class="separator:a2ae4b72edd9106d6133cae8751785324"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a75745d79c0bb4da1999d00e7fc16373e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a75745d79c0bb4da1999d00e7fc16373e"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>time</b> = None</td></tr>
+<tr class="separator:a75745d79c0bb4da1999d00e7fc16373e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1e2dea45e584d3da2bb5cb7c579b3dfd"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1e2dea45e584d3da2bb5cb7c579b3dfd"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>duration</b> = None</td></tr>
+<tr class="separator:a1e2dea45e584d3da2bb5cb7c579b3dfd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><pre class="fragment">Class that represents a single task</pre> </div><hr/>The documentation for this class was generated from the following file:<ul>
+<div class="textblock"><pre class="fragment">Class that represents a single task</pre> </div><h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="a710588125ef7265d993a3717f76388fb"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def schedule.Task.setDate </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>date</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<pre class="fragment">:param date: datetime date object of a formatted string
+:return: None
+</pre> 
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
 <li>schedule.py</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Dec 4 2014 17:37:06 for Brewery Scheduling by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Dec 4 2014 18:57:43 for Brewery Scheduling by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>
