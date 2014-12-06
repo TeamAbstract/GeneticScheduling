@@ -10,8 +10,8 @@ class Schedule:
 	def __init__(self, numOfVessels):
 		self.vessels = [Vessel() for x in range(numOfVessels)]
 
-	"""Returns the number of vessels currently defined"""
 	def getVesselCount(self):
+		"""Returns the number of vessels currently defined"""
 		return len(self.vessels)
 
 	def printSchedule(self):
