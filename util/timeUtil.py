@@ -12,7 +12,7 @@ class TimeUtil:
                                    # syntax = "hr:min" seconds probably aren't needed
             timeSignature = time.split(":")
             if len(timeSignature) == 1:
-                return Time(timeSignature[0])
+                return Time(int(timeSignature[0]))
             if len(timeSignature) == 2:
-                return Time(timeSignature[0],
-                            timeSignature[1])
+                return Time(int(timeSignature[0]),
+                            int(timeSignature[1]))
