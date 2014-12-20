@@ -33,7 +33,7 @@ class Schedule:
 
 
 class Vessel:
-    """ !
+    """!
     Class that stores the information and schedule on a per vessel basis
     """
 
