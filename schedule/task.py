@@ -1,5 +1,5 @@
 from datetime import time as Time  # done to fit in with caps = class
-from util.timeUtil import TimeUtil
+import util
 from product import Product
 
 
@@ -11,23 +11,23 @@ class Task:
     time = None  # time that the product production should start
     duration = None  # time that the product production will take
 
-    def __init__(self, time="1", name="NoName", duration="1"):
+    def __init__(self, name="NoName", time="1", duration="1"):
         self.name = name
 
         if isinstance(time, Time):
             self.time = time
         elif isinstance(time, str):
-            self.time = TimeUtil.getTimeObject(time)
+            self.time = util.getTimeObject(time)
 
         if isinstance(duration, Time):
             self.duration = duration
         elif isinstance(duration, str):
-            self.duration = TimeUtil.getTimeObject(duration)
+            self.duration = util.getTimeObject(duration)
 
     @classmethod
     def fromProduct(cls, product):
         assert isinstance(product, Product)
-        return cls()
+        return cls(product.name)
 
     def setDate(self, time):
         """
@@ -39,7 +39,7 @@ class Task:
         elif isinstance(time, str):
             self.time = datetime.date(time)
         else:
-            raise TypeError("setDate requires a datetime.datetime object or a string")
+            raise TypeError("setDate requires a datetime.datetime object or a string not", type(time))
 
     def setDuration(self, duration):
         """
@@ -51,8 +51,8 @@ class Task:
         elif isinstance(duration, str):
             self.duration = datetime.time(duration)
         else:
-            raise TypeError("setDuration requires a datetime.time object or a string")
+            raise TypeError("setDuration requires a datetime.time object or a string not", type(duration))
 
     def printTask(self):
-        print(self.name, ":", self.time, " ", self.duration)
+        print(self.name.rjust(8, " "), ":", self.time, " ", self.duration)
 

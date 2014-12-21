@@ -7,9 +7,9 @@
 
 var indexSectionsWithContent =
 {
-  0: "gmpstv",
+  0: "_gmpstv",
   1: "gmpstv",
-  2: "gs",
+  2: "_gs",
   3: "g"
 };
 

@@ -11,7 +11,8 @@ class Schedule:
     id = 0
 
     def __init__(self, numOfVessels):
-        self.vessels = [Vessel() for x in range(numOfVessels)]
+        for x in range(numOfVessels):
+            self.vessels.append(Vessel(x))
         self.id = Schedule.id
         Schedule.id += 1
 
@@ -22,12 +23,14 @@ class Schedule:
     def printSchedule(self):
         print("Schedule:", self.id)
         for vessel in self.vessels:
+            print("Vessel: ", vessel.number)
             vessel.printVessel()
 
     def addTask(self, vesselID, task):
         assert vesselID < self.getVesselCount()
         assert vesselID >= 0
         assert isinstance(task, Task)
+        print("Adding ", task.name, " to vessel ", vesselID)
         if isinstance(task, Task):
             self.vessels[vesselID].addTask(task)
 
@@ -37,7 +40,9 @@ class Vessel:
     Class that stores the information and schedule on a per vessel basis
     """
 
-    tasks = []
+    def __init__(self, number):
+        self.number = number
+        self.tasks = []
 
     def addTask(self, task):
         if isinstance(task, Task):

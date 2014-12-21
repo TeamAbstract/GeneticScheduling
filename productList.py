@@ -1,4 +1,4 @@
-from schedule import Task
+from product import Product
 
 
 class ProductList:
@@ -9,6 +9,8 @@ class ProductList:
     def __init__(self):
         self.products = []
 
-    def addProduct(self, task):
-        if isinstance(task, Task):
-            self.products.append(task1)
+    def addProduct(self, product):
+        if isinstance(product, Product):
+            self.products.append(product)
+        else:
+            print("Add product requires a product")

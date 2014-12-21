@@ -3,16 +3,18 @@ import sys
 from generator import Generator
 from genepool import Genepool
 from productList import ProductList
+from product import Product
 
 if sys.version_info < (3, 0):
     raise EnvironmentError("Outdated version update to V3")
-else:
-    print("System check fine")
 
-taskList = ProductList()
+productList = ProductList()
+productList.addProduct(Product("Stuff", "1"))
+productList.addProduct(Product("Other", "2"))
+productList.addProduct(Product("Brew", "4"))
+
+generator = Generator(productList.products)
 
 genepool = Genepool()
-genepool.addSchedule(Generator.getNewSchedule())
-genepool.addSchedule(Generator.getNewSchedule())
-genepool.addSchedule(Generator.getNewSchedule())
+genepool.addSchedule(generator.getNewSchedule())
 genepool.printPool()
