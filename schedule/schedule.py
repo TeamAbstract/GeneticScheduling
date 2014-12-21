@@ -6,11 +6,10 @@ class Schedule:
     Class that is used to interface with a generated schedule
     """
 
-    vessels = []
-    rating = 0.0
-    id = 0
+    id = 0  # static variable for giving each vessel a new id
 
     def __init__(self, numOfVessels):
+        self.vessels = []
         for x in range(numOfVessels):
             self.vessels.append(Vessel(x))
         self.id = Schedule.id

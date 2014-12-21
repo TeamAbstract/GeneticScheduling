@@ -12,6 +12,7 @@ productList = ProductList()
 productList.addProduct(Product("Stuff", "1"))
 productList.addProduct(Product("Other", "2"))
 productList.addProduct(Product("Brew", "4"))
+productList.addProduct(Product("beer", "4"))
 
 generator = Generator(productList.products)
 

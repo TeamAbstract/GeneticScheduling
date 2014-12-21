@@ -7,9 +7,6 @@ class Task:
     """!
     Class that represents a single scheduled task
     """
-    name = ""
-    time = None  # time that the product production should start
-    duration = None  # time that the product production will take
 
     def __init__(self, name="NoName", time="1", duration="1"):
         self.name = name
@@ -27,7 +24,7 @@ class Task:
     @classmethod
     def fromProduct(cls, product):
         assert isinstance(product, Product)
-        return cls(product.name)
+        return cls(product.name, "1", product.brewTime)  #TODO change parameterss
 
     def setDate(self, time):
         """

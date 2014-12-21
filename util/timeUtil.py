@@ -1,7 +1,6 @@
 from datetime import time as Time
 
 
-
 def getTimeObject(time=None):
     """!create a datetime.time object from various means"""
     if time is None:  # create empty object
@@ -15,3 +14,6 @@ def getTimeObject(time=None):
         if len(timeSignature) == 2:
             return Time(int(timeSignature[0]),
                         int(timeSignature[1]))
+
+    else:
+        raise TypeError("Time object requires no parameter or a datetime.time object")

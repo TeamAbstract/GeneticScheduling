@@ -7,10 +7,6 @@ class Generator:
     Class responsible for generating schedules
     """
     def __init__(self, productList):
-        """
-        :param productList:
-        """
-
         self.productList = productList
 
     def getNewSchedule(self):
