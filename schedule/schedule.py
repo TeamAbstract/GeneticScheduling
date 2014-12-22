@@ -10,6 +10,8 @@ class Schedule:
 
     def __init__(self, numOfVessels):
         self.vessels = []
+        self.fitness = 0.0
+
         for x in range(numOfVessels):
             self.vessels.append(Vessel(x))
         self.id = Schedule.id
@@ -29,7 +31,7 @@ class Schedule:
         assert vesselID < self.getVesselCount()
         assert vesselID >= 0
         assert isinstance(task, Task)
-        print("Adding ", task.name, " to vessel ", vesselID)
+        # print("Adding ", task.name, " to vessel ", vesselID)
         if isinstance(task, Task):
             self.vessels[vesselID].addTask(task)
 

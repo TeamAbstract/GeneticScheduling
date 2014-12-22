@@ -1,7 +1,7 @@
 import sys
 
 from generator import Generator
-from genepool import Genepool
+from genepool import GenePool
 from productList import ProductList
 from product import Product
 
@@ -16,6 +16,6 @@ productList.addProduct(Product("beer", "4"))
 
 generator = Generator(productList.products)
 
-genepool = Genepool()
+genepool = GenePool()
 genepool.addSchedule(generator.getNewSchedule())
 genepool.printPool()
