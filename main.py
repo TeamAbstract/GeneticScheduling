@@ -1,5 +1,8 @@
 import sys
 
+import datetime
+import util.timeUtil
+
 from generator import Generator
 from genepool import GenePool
 from productList import ProductList

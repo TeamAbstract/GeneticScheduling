@@ -1,2 +1,2 @@
-from util.timeUtil import getTimeObject
+from util.timeUtil import *
 from util.systemUtil import *

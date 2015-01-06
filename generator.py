@@ -9,7 +9,7 @@ class Generator:
     def __init__(self, productList):
         self.productList = productList
 
-    #TODO more sophisticated generation algorithm
+    # TODO more sophisticated generation algorithm
     def getNewSchedule(self):
         """quick algorithm for testing
         Randomly assigns products to the schedule, doesn't check for conflicts
@@ -17,5 +17,5 @@ class Generator:
         """
         schedule = Schedule(3)
         for product in self.productList:
-            schedule.addTask(randint(0, 2), Task.fromProduct(product))
+            schedule.addTask(randint(0, 2), Task.fromProduct(product, "2014:1:1:1:1"))
         return schedule
