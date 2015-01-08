@@ -1,9 +1,5 @@
 from schedule.task import Task
 
-import util
-
-import datetime
-
 
 class Schedule:
     """!

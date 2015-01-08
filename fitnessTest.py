@@ -21,7 +21,7 @@ class FitnessTest:
 
         Schedule Requirements:
         No conflicts
-        Reduces cleaning time
+        Minimal cleaning time(same products in each vessel)
         Products completed before due date
         Nothing finishes after hours
         """
