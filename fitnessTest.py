@@ -15,6 +15,7 @@ class FitnessTest:
     @staticmethod
     def testSchedule(schedule):
         # TODO add more requirements
+        # TODO fitness test function
         """
         Tests a single schedule for it's fitness
         :param schedule: schedule to be tested
@@ -23,7 +24,7 @@ class FitnessTest:
         No conflicts
         Minimal cleaning time(same products in each vessel)
         Products completed before due date
-        Nothing finishes after hours
+        Nothing starts/finishes after hours
         """
         print("Testing schedule ", schedule.id)
 

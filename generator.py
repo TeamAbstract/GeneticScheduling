@@ -10,6 +10,7 @@ class Generator:
         self.productList = productList
 
     # TODO more sophisticated generation algorithm
+    #
     def getNewSchedule(self):
         """quick algorithm for testing
         Randomly assigns products to the schedule, doesn't check for conflicts
