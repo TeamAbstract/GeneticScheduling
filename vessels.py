@@ -16,10 +16,14 @@ class Vessels:
         Vessels.vessels.sort(key=lambda x: x.size)
 
     @staticmethod
+    def getVesselNum():
+        return len(Vessels.vessels)
+
+    @staticmethod
     def getFit(size):
         """! get the smallest vessel index that will fit the size
         :param size: size of order in kegs
-        :return: integer index of the vessel
+        :return: integer index of the vessel or list of vessel indexes
         """
         # TODO handle splitting of orders
 
@@ -30,7 +34,7 @@ class Vessels:
         # if too large for any one vessel
         vesselList = []
         for vessel in reversed(Vessels.vessels):
-            while size > vessel.size:  # while still room in vessel
+            while size > vessel.size:  # while still room in vessel uses largest first
                 vesselList.append(vessel.id)
                 size -= vessel.size
         vesselList.append(Vessels.getFit(size))  # add remaining barrels

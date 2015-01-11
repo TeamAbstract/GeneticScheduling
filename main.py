@@ -22,7 +22,7 @@ generator = Generator(productList.products)
 genepool = GenePool()
 genepool.addSchedule(generator.getNewSchedule())
 
-for i in range(20):  # temp loop to run algorithm
+for _count in range(20):  # temp loop to run algorithm
     genepool.refreshSchedules()
     FitnessTest.testPool(genepool)
     genepool.removeSchedules()

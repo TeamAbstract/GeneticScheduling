@@ -3,6 +3,8 @@ import schedule
 from schedule.schedule import Schedule
 from schedule.task import Task
 
+from vessels import Vessels
+
 from copy import deepcopy
 from random import randint
 
@@ -46,6 +48,8 @@ class Mutator:
         for vessel in task.vessels:
             if randint(0, 100) <= Mutator.percentageChange:
                 continue
+            vessel = randint(0, Vessels.getVesselNum())
+            print("changed ", task.product.name, "vessel to", vessel)
 
 
 
