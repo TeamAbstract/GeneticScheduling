@@ -25,7 +25,7 @@ class Mutator:
         newSchedule = deepcopy(schedule)
         assert isinstance(newSchedule, Schedule)
         for task in newSchedule.getTask():
-            if randint(0, 100) < Mutator.percentageChange:
+            if randint(0, 100) <= Mutator.percentageChange:
                 continue
             Mutator.mutateTask(task)
         return newSchedule
@@ -39,11 +39,12 @@ class Mutator:
         :param task: task to be mutated
         """
 
-        # TODO more efficient mutate i.e. not purely random
+        # TODO more efficient mutate i.e. not mostly random
+        # TODO add order splitting i.e. one task over two vessels
 
         assert isinstance(task, Task)
         for vessel in task.vessels:
-            if randint(0, 100) < Mutator.percentageChange:
+            if randint(0, 100) <= Mutator.percentageChange:
                 continue
 
 

@@ -1,5 +1,6 @@
 from schedule import *
 from random import randint
+from vessels import Vessels
 
 
 class Generator:
@@ -18,5 +19,5 @@ class Generator:
         """
         schedule = Schedule()
         for product in self.productList:
-            schedule.addTask(Task(product, "2014:1:1:1:1"))
+            schedule.addTask(Task(product, Vessels.getFit(product.amount), "2014:1:1:1:1"))
         return schedule

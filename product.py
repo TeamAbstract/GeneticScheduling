@@ -7,9 +7,10 @@ class Product:
     unscheduled product that needs to be scheduled
     """
 
-    def __init__(self, name, brewTime, dueDate=None):
+    def __init__(self, name, brewTime, amount, dueDate=None):
         self.name = name
         self.dueDate = dueDate
+        self.amount = amount
 
         if isinstance(brewTime, Time):
             self.brewTime = brewTime

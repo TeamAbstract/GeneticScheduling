@@ -9,10 +9,10 @@ class Task:
     Class that represents a single scheduled task
     """
 
-    def __init__(self, product, startTime="2014:1:1"):
+    def __init__(self, product, vessels, startTime="2014:1:1"):
         assert isinstance(product, Product), type(product)
         self.product = product
-        self.vessels = []  # list of vessels that the task will use
+        self.vessels = []
 
         if isinstance(startTime, DateTime):
             self.startTime = startTime
@@ -20,6 +20,15 @@ class Task:
             self.startTime = util.getDateTimeObject(startTime)
         else:
             raise TypeError("Task requires a datetime.datetime or str parameter not ", type(startTime))
+
+        if isinstance(vessels, int):
+            self.vessels.insert(0, vessels)
+        elif isinstance(vessels, (list, tuple)):
+            self.vessels = vessels
+        elif vessels is None:  # TODO add None type handling
+            pass
+        else:
+            raise TypeError("Task requires vessel or int parameter not ", type(vessels))
 
     def setDate(self, date):
         """
@@ -41,6 +50,6 @@ class Task:
         util.addDateAndTime(self.startTime, self.duration)
 
     def printTask(self):
-        print("  ", self.startTime, " ", self.product.brewTime)
+        print("  ", self.startTime, " ", self.product.brewTime, " ", self.product.amount, "kegs")
         print("   in vessels", str(self.vessels).strip("[]"))
 
