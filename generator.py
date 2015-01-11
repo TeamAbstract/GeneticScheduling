@@ -16,7 +16,7 @@ class Generator:
         Randomly assigns products to the schedule, doesn't check for conflicts
         or add them in any optimal way, cleaning the vessels also need to be scheduled
         """
-        schedule = Schedule(3)
+        schedule = Schedule()
         for product in self.productList:
-            schedule.addTask(randint(0, 2), Task.fromProduct(product, "2014:1:1:1:1"))
+            schedule.addTask(Task(product, "2014:1:1:1:1"))
         return schedule

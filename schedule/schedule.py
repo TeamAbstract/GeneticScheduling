@@ -1,5 +1,4 @@
 from schedule.task import Task
-from schedule.vessel import Vessel
 
 
 class Schedule:
@@ -9,29 +8,36 @@ class Schedule:
 
     id = 0  # static variable for giving each vessel a new id
 
-    def __init__(self, numOfVessels):
-        self.vessels = []
+    def __init__(self):
         self.fitness = 0.0
+        self.tasks = []
 
-        for x in range(numOfVessels):
-            self.vessels.append(Vessel(x))
         self.id = Schedule.id
         Schedule.id += 1
 
-    def getVesselCount(self):
-        """Returns the number of vessels currently defined"""
-        return len(self.vessels)
+    def getTaskCount(self):
+        """Returns the number of tasks that the schedule has defined"""
+        return len(self.tasks)
+
+    def getTask(self, index=None):
+        """Returns a specific task or if id==None then all tasks as a tuple
+        :param index: task to return default = None
+        :return: task or list of tasks
+        """
+        assert index < len(self.tasks) - 1
+        assert index > 0
+
+        if index is None:
+            return tuple(self.tasks)
+        else:
+            return self.tasks[index]
 
     def printSchedule(self):
         print("Schedule:", self.id)
-        for vessel in self.vessels:
-            print("Vessel: ", vessel.number)
-            vessel.printVessel()
+        for task in self.tasks:
+            print("Task: ", task.product.name)
+            task.printTask()
 
-    def addTask(self, vesselID, task):
-        assert vesselID < self.getVesselCount()
-        assert vesselID >= 0
+    def addTask(self, task):
         assert isinstance(task, Task)
-        # print("Adding ", task.name, " to vessel ", vesselID)
-        if isinstance(task, Task):
-            self.vessels[vesselID].addTask(task)
+        self.tasks.append(task)

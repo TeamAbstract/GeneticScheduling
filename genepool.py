@@ -22,5 +22,5 @@ class GenePool:
         for schedule in self.schedules:
             schedule.printSchedule()
 
-    def getIterable(self):
-        return iter(self.schedules)
+    def getSchedules(self):
+        return self.schedules

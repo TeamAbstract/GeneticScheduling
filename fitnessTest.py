@@ -6,8 +6,8 @@ class FitnessTest:
     @staticmethod
     def testPool(genePool):
         assert isinstance(genePool, GenePool)
-        iterable = genePool.getIterable()
-        for schedule in iterable:
+
+        for schedule in genePool.getSchedules():
             FitnessTest.testSchedule(schedule)
 
     @staticmethod
