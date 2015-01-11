@@ -47,6 +47,7 @@ class Mutator:
                 continue
 
 
+
     @staticmethod
     def combineSchedules(schedule1, schedule2):
         """! Create a new schedule that is a combination of the two schedules
@@ -61,7 +62,7 @@ class Mutator:
         # temporary just returns the first schedule
 
         """
-        I'm wondering if this is necessary, it would be hard to implement without losing data, whereas mutating one schedule(see above)would be easier with no risk of data loss
+        I'm wondering if this is necessary, it would be hard to implement without losing data, whereas mutating one schedule(see above)would be easier with no problems of data loss
 
         """
         return schedule1

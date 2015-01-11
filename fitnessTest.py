@@ -24,7 +24,7 @@ class FitnessTest:
         Products completed before due date
         Nothing starts/finishes after hours
         """
-        print("Testing schedule ", schedule.id)
+        #print("Testing schedule ", schedule.id)
 
         fitness = 0.0
 
