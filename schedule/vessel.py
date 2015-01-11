@@ -1,3 +1,6 @@
+from schedule.task import Task
+
+
 class Vessel:
     """!
     Class that stores the information and schedule on a per vessel basis

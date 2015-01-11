@@ -1,4 +1,5 @@
 from schedule.task import Task
+from schedule.vessel import Vessel
 
 
 class Schedule:
