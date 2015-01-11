@@ -7,10 +7,8 @@ class FitnessTest:
     def testPool(genePool):
         assert isinstance(genePool, GenePool)
         iterable = genePool.getIterable()
-        try:
-            schedule = iterable.next()  # TODO threading?
-        except StopIteration:
-            pass
+        for schedule in iterable:
+            FitnessTest.testSchedule(schedule)
 
     @staticmethod
     def testSchedule(schedule):
