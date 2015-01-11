@@ -40,3 +40,5 @@ class GenePool:
 
     def refreshSchedules(self):
         """!add schedules to get the genepool to a maximum"""
+
+        # combine schedules with the mutator to get new ones
