@@ -1,5 +1,7 @@
 from genepool import GenePool
 
+from random import randrange
+
 
 class FitnessTest:
 
@@ -28,6 +30,9 @@ class FitnessTest:
 
         fitness = 0.0
 
+        # TODO non random number
+        # currently just added for testing
 
+        fitness = randrange(-100, 100)  # actual test may produce numbers outside this range
 
         schedule.fitness = fitness

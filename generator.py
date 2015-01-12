@@ -11,7 +11,8 @@ class Generator:
         self.productList = productList
 
     # TODO more sophisticated generation algorithm
-    #
+    # Put products into smallest vessel possible
+    # group similar products to reduce cleaning time
     def getNewSchedule(self):
         """quick algorithm for testing
         Randomly assigns products to the schedule, doesn't check for conflicts
