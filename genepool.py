@@ -12,7 +12,7 @@ class GenePool:
         if schedule_list is None:
             schedule_list[0] = schedule
         for s in range(1 , 100):
-            schedule_list.append(schedule)a
+            schedule_list.append(schedule)
 
 
 
