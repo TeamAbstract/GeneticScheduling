@@ -9,7 +9,7 @@ class Task:
     Class that represents a single scheduled task
     """
 
-    def __init__(self, product, vessels, startTime="2014:1:1"):
+    def __init__(self, product, vessels, startTime=datetime.datetime.now()):
         assert isinstance(product, Product), type(product)
         self.product = product
         self.vessels = []
