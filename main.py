@@ -25,6 +25,7 @@ generator = Generator(productList.products)
 
 genepool = GenePool()
 genepool.addSchedule(generator.getNewSchedule())
+genepool.addSchedule(generator.getNewSchedule())
 
 for _count in range(20):  # temp loop to run algorithm
     genepool.refreshSchedules()
