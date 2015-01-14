@@ -7,19 +7,13 @@ class GenePool:
     class to store generated schedules
     """
 
-    # def add_schedule(self):
-    #     schedule_list = []
-    #     if schedule_list is None:
-    #         schedule_list[0] = schedule
-    #     for s in range(1 , 100):
-    #         schedule_list.append(schedule)
 
 
 
-            # """
-            #class should maintain the list of schedules
-            #fill out the list of schedules to be the max and then after the fitness test has run, remove the worst to be equal with the minimum number
-            #"""
+        # """
+        #class should maintain the list of schedules
+        #fill out the list of schedules to be the max and then after the fitness test has run, remove the worst to be equal with the minimum number
+        #"""
 
     # settings variables
     minNumOfSchedules = 50
