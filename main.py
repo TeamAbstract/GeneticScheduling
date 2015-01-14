@@ -10,7 +10,7 @@ import sys
 sys.path.insert(0, '/usr/local/lib')
 
 vessels = Vessels()
-vessels.addVessel(20)  # TODO insert correct vessel sizes
+vessels.addVessel(20)
 vessels.addVessel(30)
 vessels.addVessel(50)
 
