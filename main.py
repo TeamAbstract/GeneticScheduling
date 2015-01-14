@@ -5,10 +5,14 @@ from product import Product
 from fitnessTest import FitnessTest
 from vessels import Vessels
 
+import sys
+
+sys.path.insert(0, '/usr/local/lib')
+
 vessels = Vessels()
-vessels.addVessel(30)  # TODO insert correct vessel sizes
+vessels.addVessel(20)  # TODO insert correct vessel sizes
+vessels.addVessel(30)
 vessels.addVessel(50)
-vessels.addVessel(40)
 
 # temporary will later be called from the GUI
 productList = ProductList()
