@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['schedule',['Schedule',['../classschedule_1_1schedule_1_1Schedule.html',1,'schedule::schedule']]],
-  ['setdate',['setDate',['../classschedule_1_1task_1_1Task.html#ac154de31d5e7b34060005c94c21e6d7f',1,'schedule::task::Task']]],
-  ['system',['system',['../classutil_1_1systemUtil_1_1system.html',1,'util::systemUtil']]]
+  ['refreshschedules',['refreshSchedules',['../classgenepool_1_1GenePool.html#a72d39c875692e6615e89fdc30556cc2d',1,'genepool::GenePool']]],
+  ['removeschedules',['removeSchedules',['../classgenepool_1_1GenePool.html#a1004ef4c3252d5a87654243e1df2ab34',1,'genepool::GenePool']]]
 ];

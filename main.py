@@ -16,10 +16,10 @@ vessels.addVessel(50)
 
 # temporary will later be called from the GUI
 productList = ProductList()
-productList.addProduct(Product("Stuff", "1", 10))
-productList.addProduct(Product("Other", "2", 30))
+productList.addProduct(Product("Booze", "1", 10))
+productList.addProduct(Product("Hooch", "2", 30))
 productList.addProduct(Product("Brew", "4", 15))
-productList.addProduct(Product("beer", "4", 60))
+productList.addProduct(Product("Beer", "4", 60))
 
 generator = Generator(productList.products)
 

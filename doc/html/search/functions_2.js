@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['setdate',['setDate',['../classschedule_1_1task_1_1Task.html#ac154de31d5e7b34060005c94c21e6d7f',1,'schedule::task::Task']]]
+  ['mutateschedule',['mutateSchedule',['../classmutator_1_1Mutator.html#a57fc35c339c5e55f61e04b4fce4f8c87',1,'mutator::Mutator']]],
+  ['mutatetask',['mutateTask',['../classmutator_1_1Mutator.html#a681810147df8b7828483e0313020e7f4',1,'mutator::Mutator']]]
 ];
