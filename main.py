@@ -4,6 +4,7 @@ from productList import ProductList
 from product import Product
 from fitnessTest import FitnessTest
 from vessels import Vessels
+from mutator import Mutator
 
 import sys
 
@@ -25,6 +26,7 @@ generator = Generator(productList.products)
 
 genepool = GenePool()
 genepool.addSchedule(generator.getNewSchedule())
+
 
 for _count in range(20):  # temp loop to run algorithm
     genepool.refreshSchedules()
