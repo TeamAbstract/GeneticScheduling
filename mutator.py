@@ -17,12 +17,12 @@ class Mutator:
     # static variables for settings
     percentageChange = 10  # chance of a variable being changed(0-100)
 
-    @staticmethod
-    def mutateSchedule(schedule):
+    def mutateSchedule(schedule) -> object:
         """! randomly modifies a schedule and returns the changed version
-        :param schedule: schedule to be mutated
-        :return: modified schedule
-        """
+            :rtype : object
+            :param schedule: schedule to be mutated
+            :return: modified schedule
+            """
         assert isinstance(schedule, Schedule)
         newSchedule = deepcopy(schedule)
         assert isinstance(newSchedule, Schedule)
