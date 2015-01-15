@@ -20,5 +20,5 @@ class Generator:
         """
         schedule = Schedule()
         for product in self.productList:
-            schedule.addTask(Task(product, Vessels.getFit(product.amount), "2014:1:1:1:1"))
+            schedule.addTask(Task(product, Vessels.getFit(product.amount)))
         return schedule
