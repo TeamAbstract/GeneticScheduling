@@ -44,6 +44,7 @@ class Schedule:
 		for task in self.tasks:
 			print("Task: ", task.product.name)
 			task.printTask()
+		print()
 
 	def addTask(self, task):
 		assert isinstance(task, Task)
