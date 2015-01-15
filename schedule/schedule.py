@@ -24,7 +24,8 @@ class Schedule:
         :param index: task to return default = None
         :return: task or list of tasks
         """
-        assert index < len(self.tasks) - 1
+        if index is not None:
+            assert index < len(self.tasks) - 1
         assert index > 0
 
         if index is None:
