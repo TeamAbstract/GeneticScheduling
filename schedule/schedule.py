@@ -26,7 +26,7 @@ class Schedule:
         """
         if index is not None:
             assert index < len(self.tasks) - 1
-        assert index > 0
+            assert index > 0
 
         if index is None:
             return tuple(self.tasks)
