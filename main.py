@@ -4,11 +4,7 @@ from productList import ProductList
 from product import Product
 from fitnessTest import FitnessTest
 from vessels import Vessels
-from mutator import Mutator
 
-import sys
-
-sys.path.insert(0, '/usr/local/lib')
 
 vessels = Vessels()
 vessels.addVessel(20)

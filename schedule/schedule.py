@@ -10,6 +10,9 @@ class Schedule:
 
 	@staticmethod
 	def getNextID():
+		"""! returns the static variable id and increments it
+		:return: current value of id
+		"""
 		currentID = Schedule.id
 		Schedule.id += 1
 		return currentID
