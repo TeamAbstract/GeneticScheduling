@@ -25,6 +25,7 @@ class Mutator:
         """
         assert isinstance(schedule, Schedule)
         newSchedule = deepcopy(schedule)
+        newSchedule.id = Schedule.getNextID()
         assert isinstance(newSchedule, Schedule)
         for task in newSchedule.getTask():
             if randint(0, 100) <= Mutator.percentageChange:
@@ -50,7 +51,6 @@ class Mutator:
                 continue
             vessel = randint(0, Vessels.getVesselNum())
             print("changed ", task.product.name, "vessel to", vessel)
-
 
 
     @staticmethod
