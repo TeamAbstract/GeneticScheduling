@@ -11,6 +11,7 @@ vessels.addVessel(20)
 vessels.addVessel(30)
 vessels.addVessel(50)
 
+
 # temporary will later be called from the GUI
 productList = ProductList()
 productList.addProduct(Product("Booze", "1", 10))
