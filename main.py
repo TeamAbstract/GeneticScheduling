@@ -5,14 +5,12 @@ from product import Product
 from fitnessTest import FitnessTest
 from vessels import Vessels
 
-import sys
-
-sys.path.insert(0, '/usr/local/lib')
 
 vessels = Vessels()
 vessels.addVessel(20)
 vessels.addVessel(30)
 vessels.addVessel(50)
+
 
 # temporary will later be called from the GUI
 productList = ProductList()
@@ -25,7 +23,7 @@ generator = Generator(productList.products)
 
 genepool = GenePool()
 genepool.addSchedule(generator.getNewSchedule())
-genepool.addSchedule(generator.getNewSchedule())
+
 
 for _count in range(20):  # temp loop to run algorithm
     genepool.refreshSchedules()
