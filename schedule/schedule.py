@@ -1,6 +1,5 @@
 from schedule.task import Task
 
-
 class Schedule:
 	"""!
 	Class that is used to interface with a generated schedule
