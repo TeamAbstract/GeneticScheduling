@@ -21,6 +21,7 @@ productList.addProduct(Product("Beer", "4", 60))
 
 generator = Generator(productList.products)
 
+
 genepool = GenePool()
 genepool.addSchedule(generator.getNewSchedule())
 

@@ -12,11 +12,14 @@ class Generator:
 
 
     def saveHigh(self):
-        highSave=open('c:/HighPriorityIsssssssues.txt', 'w')
+        highSave=open('c:/HighPriorityIssues.txt', 'w')
+
     def saveMedium(self):
         mediumSave=open('c:/MediumPriorityIssues.txt', 'w')
+
     def saveLow(self):
         lowSave=open('c:/LowPriorityIssues.txt', 'w')
+
 
 
     # TODO more sophisticated generation algorithm
