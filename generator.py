@@ -12,7 +12,7 @@ class Generator:
 
 
     def saveHigh(self):
-        highSave=open('c:/HighPriorityIssues.txt', 'w')
+        highSave=open('c:/HighPriorityIsddfsdsues.txt', 'w')
 
     def saveMedium(self):
         mediumSave=open('c:/MediumPriorityIssues.txt', 'w')
