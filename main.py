@@ -4,6 +4,9 @@ from productList import ProductList
 from product import Product
 from fitnessTest import FitnessTest
 from vessels import Vessels
+from schedule import Schedule
+
+
 
 
 vessels = Vessels()
@@ -21,13 +24,14 @@ productList.addProduct(Product("Beer", "4", 60))
 
 generator = Generator(productList.products)
 
+
 genepool = GenePool()
 genepool.addSchedule(generator.getNewSchedule())
 
 
-for _count in range(20):  # temp loop to run algorithm
+for _count in range(1):  # temp loop to run algorithm
     genepool.refreshSchedules()
     FitnessTest.testPool(genepool)
-    genepool.removeSchedules()
+    #GenePool.removeSchedules(10, 60, 60)
 
-genepool.printPool()
+#genepool.printPool()
