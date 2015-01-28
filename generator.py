@@ -12,8 +12,8 @@ class Generator:
 
 
     def saveHigh(self):
-        ##highSave=open('c:/HighPriorityIsddfsdsues.txt', 'w')
-        print("boom bitches  this is my method    woop woop")
+        highSave=open('c:/HighPriorityIsddfsdsues.txt', 'w')
+
     def saveMedium(self):
         mediumSave=open('c:/MediumPriorityIssues.txt', 'w')
 
