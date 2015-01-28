@@ -12,8 +12,8 @@ class Generator:
 
 
     def saveHigh(self):
-        highSave=open('c:/HighPriorityIsddfsdsues.txt', 'w')
-
+        ##highSave=open('c:/HighPriorityIsddfsdsues.txt', 'w')
+        print("boom bitches  this is my method    woop woop")
     def saveMedium(self):
         mediumSave=open('c:/MediumPriorityIssues.txt', 'w')
 
@@ -33,4 +33,5 @@ class Generator:
         schedule = Schedule()
         for product in self.productList:
             schedule.addTask(Task(product, Vessels.getFit(product.amount)))
+
         return schedule
