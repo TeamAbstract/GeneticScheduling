@@ -19,7 +19,7 @@ class Mutator:
 	percentageChange = 100  # chance of a variable being changed(0-100)
 
 	@staticmethod
-	def mutateSchedule(schedule) -> Schedule:
+	def mutateSchedule(schedule):
 		"""! randomly modifies a schedule and returns the changed version
 			:rtype : object
 			:param schedule: schedule to be mutated
@@ -43,9 +43,7 @@ class Mutator:
 	@staticmethod
 	def mutateTask(task):
 		"""! mutates a single task
-
 		Currently a purely random mutate, more efficient ones can be implemented in the future
-
 		:param task: task to be mutated
 		"""
 
@@ -62,23 +60,3 @@ class Mutator:
 				hoursAdded = str(randint(-12, 12))
 				task.startTime = datetime.combine(task.startTime, util.getTimeObject(hoursAdded))
 				print("Added ", hoursAdded, " hours to task", task.product.name)
-
-
-	@staticmethod
-	def combineSchedules(schedule1, schedule2):
-		"""! Create a new schedule that is a combination of the two schedules
-		:param schedule1:
-		:param schedule2:
-		:return: new schedule
-		"""
-		assert isinstance(schedule1, schedule.Schedule)
-		assert isinstance(schedule2, schedule.Schedule)
-
-		# TODO implement
-		# temporary just returns the first schedule
-
-		"""
-		I'm wondering if this is necessary, it would be hard to implement without losing data, whereas mutating one schedule(see above)would be easier with no problems of data loss
-
-		"""
-		return schedule1
