@@ -59,3 +59,5 @@ class Task:
 		print("  ", self.startTime, " ", self.product.brewTime, " ", self.product.amount, "kegs")
 		print("   in vessels", str(self.vessels).strip("[]"))
 
+	def getVessel(self):
+		return self.vessels
