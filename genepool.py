@@ -35,7 +35,7 @@ class GenePool:
 		"""
 		assert isinstance(schedule, Schedule)
 
-	self.schedules.append(schedule)
+		self.schedules.append(schedule)
 
 
 	def printPool(self):

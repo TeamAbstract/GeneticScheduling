@@ -35,9 +35,6 @@ class Mutator:
 				continue
 			Mutator.mutateTask(newSchedule.getTask(index))
 
-		schedule.printSchedule()
-		newSchedule.printSchedule()
-
 		return newSchedule
 
 	@staticmethod

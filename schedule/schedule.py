@@ -24,10 +24,6 @@ class Schedule:
 		self.id = Schedule.id
 		Schedule.id += 1
 
-	def getTaskCount(self):
-		"""Returns the number of tasks that the schedule has defined"""
-		return len(self.tasks)
-
 	def getTask(self, index=None):
 		"""Returns a specific task or if id==None then all tasks as a tuple
 		:param index: task to return default = None

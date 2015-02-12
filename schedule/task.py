@@ -1,4 +1,5 @@
 from datetime import datetime as DateTime  # done to fit in with caps = class
+from datetime import datetime
 import datetime
 
 import util
@@ -14,6 +15,8 @@ class Task:
 		assert isinstance(product, Product), type(product)
 		self.product = product
 		self.vessels = []
+
+		self.cooldown = 1  # TODO handle cooldown properly, needs to consider change of product
 
 		if startTime is None:
 			startTime = datetime.datetime.now()
@@ -53,7 +56,7 @@ class Task:
 		Adds the duration to the time to get the finish time
 		:return: datetime.time for when the task finishes
 		"""
-		util.addDateAndTime(self.startTime, self.duration)
+		return DateTime.combine(self.startTime, self.product.brewTime)
 
 	def printTask(self):
 		print("  ", self.startTime, " ", self.product.brewTime, " ", self.product.amount, "kegs")
