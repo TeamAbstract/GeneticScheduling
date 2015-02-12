@@ -37,9 +37,8 @@ class Schedule:
 		else:
 			return tuple(self.tasks)
 
-
 	def printSchedule(self):
-		print("Schedule:", self.id)
+		print("Schedule:", self.id, " fitness ", self.fitness)
 		for task in self.tasks:
 			print("Task: ", task.product.name)
 			task.printTask()

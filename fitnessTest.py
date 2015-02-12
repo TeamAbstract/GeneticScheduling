@@ -7,7 +7,15 @@ from datetime import datetime
 
 import util
 
+
 class FitnessTest:
+	#Weighting  #TODO setup weighting
+	bonusPerHourTillDeadline = 5
+	penaltyPerHourOverDeadline = 10
+	penaltyPerHourOverlapping = 10
+	penaltyPerHourIdle = 2
+
+
 	@staticmethod
 	def testPool(genePool):
 		"""! tests every schedule in the genePool that is passed to it
@@ -54,7 +62,7 @@ class FitnessTest:
 			if task.product.dueDate is None:
 				continue
 			dTime = datetime.combine(task.getEndTime(), task.coolDown) - task.product.dueDate
-			score += util.getTotalHours(dTime) * schedule.bonusPerHourTillDeadline
+			score += util.getTotalHours(dTime) * FitnessTest.bonusPerHourTillDeadline
 		return score
 
 	@staticmethod
@@ -65,7 +73,7 @@ class FitnessTest:
 				continue
 
 			dTime = datetime.combine(task.getEndTime(), task.coolDown) - task.product.dueDate
-			partialScore = util.getTotalHours(dTime) * schedule.penaltyPerHourOverDeadline
+			partialScore = util.getTotalHours(dTime) * FitnessTest.penaltyPerHourOverDeadline
 			if partialScore > 0:
 				score += partialScore
 		return score
@@ -77,7 +85,7 @@ class FitnessTest:
 			for nextTask in schedule.tasks[index1+1:]:
 				hoursOverlapping = task.startTime - datetime.combine(task.getEndTime(), task.coolDown)
 				if task.getVessel == nextTask.getVessel and hoursOverlapping > 0:
-					score += hoursOverlapping * schedule.penaltyPerHourOverlapping
+					score += hoursOverlapping * FitnessTest.penaltyPerHourOverlapping
 		return score
 
 	@staticmethod
@@ -90,7 +98,7 @@ class FitnessTest:
 					if timeCurrent is None:
 						timeCurrent = task.getEndTime() + task.Cooldown
 					else:
-						score += (task.getStartTime() - timeCurrent).getTotalHours() * schedule.penaltyPerHourIdle
+						score += (task.getStartTime() - timeCurrent).getTotalHours() * FitnessTest.penaltyPerHourIdle
 		return score
 
 
