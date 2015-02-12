@@ -32,11 +32,11 @@ class Schedule:
 		if index is not None:
 			assert index < len(self.tasks), index
 			assert index >= 0, index
-
-		if index is None:
-			return tuple(self.tasks)
-		else:
 			return self.tasks[index]
+
+		else:
+			return tuple(self.tasks)
+
 
 	def printSchedule(self):
 		print("Schedule:", self.id)
