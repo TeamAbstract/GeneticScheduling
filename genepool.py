@@ -61,3 +61,8 @@ class GenePool:
 		for i in range(0, 10):
 			self.schedules.append(Mutator.mutateSchedule(
 				self.schedules[i]))  # this should mutate the schedule and add it to the end of a list
+
+	def getBestSchedule(self):
+		"""Return highest rated schedule
+		:return:
+		"""
