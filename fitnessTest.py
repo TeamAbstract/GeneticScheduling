@@ -3,6 +3,9 @@ from random import randrange
 import genepool
 from vessels import Vessels
 
+from datetime import datetime
+
+import util
 
 class FitnessTest:
 	@staticmethod
@@ -48,14 +51,21 @@ class FitnessTest:
 	def timeToDeadline(schedule):
 		score = 0
 		for task in schedule.tasks:
-			score += (task.getEndTime() + task.cooldown - task.getDeadline()).getTotalHours() * schedule.bonusPerHourTillDeadline
+			if task.product.dueDate is None:
+				continue
+			dTime = datetime.combine(task.getEndTime(), task.coolDown) - task.product.dueDate
+			score += util.getTotalHours(dTime) * schedule.bonusPerHourTillDeadline
 		return score
 
 	@staticmethod
 	def isOverDeadline(schedule):
 		score = 0
 		for task in schedule.tasks:
-			partialScore = (task.getEndTime() + task.cooldown - task.getDeadline()).getTotalHours() * schedule.penaltyPerHourOverDeadline
+			if task.product.dueDate is None:
+				continue
+
+			dTime = datetime.combine(task.getEndTime(), task.coolDown) - task.product.dueDate
+			partialScore = util.getTotalHours(dTime) * schedule.penaltyPerHourOverDeadline
 			if partialScore > 0:
 				score += partialScore
 		return score
@@ -67,8 +77,8 @@ class FitnessTest:
 			for y in (x + 1, len(schedule.tasks)):
 				taskX = schedule.getTask(x)
 				taskY = schedule.getTask(y)
-				hoursOverlapping = taskX.getStartTime - (taskX.getEndTime + taskX.Cooldown)
-				if taskX.getVessele == taskY.getVessele and hoursOverlapping > 0:
+				hoursOverlapping = taskX.startTime - datetime.combine(taskX.getEndTime(), taskX.coolDown)
+				if taskX.getVessel == taskY.getVessel and hoursOverlapping > 0:
 					score += hoursOverlapping * schedule.penaltyPerHourOverlapping
 		return score
 

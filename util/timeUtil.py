@@ -51,3 +51,8 @@ def addTimes(time1, time2):
 
 	assert isinstance(time1, Time)
 	assert isinstance(time2, Time)
+
+
+def getTotalHours(time):
+	assert isinstance(time, DateTime)
+	return time.days * 24 + time.hour

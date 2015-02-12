@@ -29,4 +29,4 @@ for _count in range(1):  # temp loop to run algorithm
     FitnessTest.testPool(genepool)
     #GenePool.removeSchedules(10, 60, 60)
 
-#genepool.printPool()
+genepool.printPool()

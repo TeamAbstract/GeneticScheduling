@@ -30,7 +30,7 @@ class Schedule:
 		:return: task or list of tasks
 		"""
 		if index is not None:
-			assert index <= len(self.tasks) - 1, index
+			assert index < len(self.tasks), index
 			assert index >= 0, index
 
 		if index is None:
