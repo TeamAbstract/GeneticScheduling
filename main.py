@@ -30,7 +30,7 @@ genepool.addSchedule(generator.getNewSchedule())
 for _count in range(10):  # temp loop to run algorithm
     genepool.refreshSchedules()
     FitnessTest.testPool(genepool)
-    #GenePool.removeSchedules(10, 60, 60)
+    #GenePool.removeSchedules
 
 genepool.printPool()
 
