@@ -15,7 +15,7 @@ vessels.addVessel(20)
 vessels.addVessel(30)
 vessels.addVessel(50)
 
-saveHigh('\nlots of issu94es')
+saveHigh('\nlots of issu94des')
 saveHigh('\nlots of other iss7ues')
 saveHigh('\nlots of other iss6ues')
 saveHigh('\nlots of other iss5ues')
