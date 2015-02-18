@@ -1,10 +1,11 @@
-def saveHigh():
-        highSave=open('c:/HighPriorityIsddfsdsues.txt', 'w')
-
+def saveHigh(whatyouwant):
+    highSave=open('HighPriorityIssues.txt', 'a')
+    highSave.write(whatyouwant)
+    highSave.close()
 
 def saveMedium():
-    mediumSave=open('c:/MediumPriorityIssues.txt', 'w')
+    mediumSave=open('MediumPriorityIssues.txt', 'a')
 
 
 def saveLow():
-    lowSave=open('c:/LowPriorityIssues.txt', 'w')
+    lowSave=open('LowPriorityIssues.txt', 'a')

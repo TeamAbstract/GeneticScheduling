@@ -4,6 +4,7 @@ from productList import ProductList
 from product import Product
 from fitnessTest import FitnessTest
 from vessels import Vessels
+from logger import *
 
 from datetime import *
 
@@ -14,6 +15,14 @@ vessels.addVessel(20)
 vessels.addVessel(30)
 vessels.addVessel(50)
 
+saveHigh('\nlots of issues')
+saveHigh('\nlots of other issues')
+saveHigh('\nlots of other issues')
+saveHigh('\nlots of other issues')
+saveHigh('\nlots of other issues')
+saveHigh('\nlots of other issues')
+saveHigh('\nlots of other issues')
+saveHigh('\nlots of other issues')
 
 # temporary will later be called from the GUI
 productList = ProductList()
