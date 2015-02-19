@@ -27,26 +27,14 @@ class FitnessTest:
 
 	@staticmethod
 	def testSchedule(schedule):
-		# TODO add more requirements
-		# TODO fitness test function
+		# TODO maybe add more requirements
 		"""
 		Tests a single schedule for it's fitness
 		:param schedule: schedule to be tested
-
-		Schedule Requirements:
-		No conflicts
-		Minimal cleaning time(same products in each vessel)
-		Products completed before due date
-		Nothing starts/finishes after hours
 		"""
 		print("Testing schedule ", schedule.id)
 
 		fitness = 0.0
-
-		# TODO non random number
-		# currently just added for testing
-
-		fitness = randrange(-100, 100)  # actual test may produce numbers outside this range
 
 		fitness += FitnessTest.timeToDeadline(schedule)
 		fitness += FitnessTest.isOverDeadline(schedule)

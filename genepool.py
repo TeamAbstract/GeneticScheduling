@@ -17,16 +17,11 @@ class GenePool:
 	minNumOfSchedules = 50
 	maxNumOfSchedules = 100
 
-	# TODO culling of worst schedules
-	# TODO Generation of new schedules to fill the pool
 	# TODO test the best size to use
-
-
 
 	def __init__(self):
 		self.schedules = []
 		self.size = 100  # test default size
-
 
 	def addSchedule(self, schedule):
 		"""! Adds a single schedule to the list
@@ -36,21 +31,17 @@ class GenePool:
 
 		self.schedules.append(schedule)
 
-
 	def printPool(self):
 		for schedule in self.schedules:
 			schedule.printSchedule()
 
-
 	def getSchedules(self):
 		return self.schedules
-
 
 	def removeSchedules(self):  # removes the lowest fitness from the list of fitnesses
 		"""!cull schedules to keep them to a minimum"""
 		self.schedules.sort(key=lambda schedule: schedule.fitness, reverse=True)  # sorts schedules
 		self.schedules = self.schedules[:50 - 1]  # should leave 50 best schedules
-
 
 	def refreshSchedules(self):
 		"""!add schedules to get the genepool to a maximum"""

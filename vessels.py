@@ -25,7 +25,6 @@ class Vessels:
         :param size: size of order in kegs
         :return: integer index of the vessel or list of vessel indexes
         """
-        # TODO handle splitting of orders
 
         for vessel in Vessels.vessels:
             if size <= vessel.size:

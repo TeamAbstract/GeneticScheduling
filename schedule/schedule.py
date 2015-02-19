@@ -1,3 +1,4 @@
+from PyQt5.QtWidgets import QCalendarWidget
 from schedule.task import Task
 
 
@@ -47,3 +48,4 @@ class Schedule:
 	def addTask(self, task):
 		assert isinstance(task, Task)
 		self.tasks.append(task)
+

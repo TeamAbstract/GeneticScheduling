@@ -11,7 +11,7 @@ class Generator:
         self.productList = productList
 
     # TODO more sophisticated generation algorithm
-    # Put products into smallest vessel possible !!!!!!!!!!Check out getFit in vessels.py for possible modification!!
+    # Put products into smallest vessel possible
     # group similar products to reduce cleaning time
     def getNewSchedule(self):
         """quick algorithm for testing
