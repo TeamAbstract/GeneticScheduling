@@ -41,6 +41,6 @@ for _count in range(10):  # temp loop to run algorithm
     FitnessTest.testPool(genepool)
     #GenePool.removeSchedules
 
-genepool.printPool()
+genepool.getBestSchedule().printSchedule()
 
 print("Ran in ", (datetime.now() - startTime).microseconds/1000000, " seconds")
