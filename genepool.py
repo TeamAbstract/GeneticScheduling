@@ -49,7 +49,7 @@ class GenePool:
 
     def removeSchedules(self):  # removes the lowest fitness from the list of fitnesses
         """!cull schedules to keep them to a minimum"""
-        sorted(self.schedules, key=lambda schedule: schedule.fitness, reverse=True) #sorts schedules
+        self.schedules.sort(key=lambda schedule: schedule.fitness, reverse=True) #sorts schedules
         self.schedules = self.schedules[:50-1]  #should leave 50 best schedules
 
 
