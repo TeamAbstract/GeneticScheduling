@@ -8,11 +8,6 @@ class GenePool:
 	class to store generated schedules
 	"""
 
-	# """
-	# class should maintain the list of schedules
-	# fill out the list of schedules to be the max and then after the fitness test has run, remove the worst to be equal with the minimum number
-	# """
-
 	# settings variables
 	minNumOfSchedules = 50
 	maxNumOfSchedules = 100
@@ -46,10 +41,11 @@ class GenePool:
 	def refreshSchedules(self):
 		"""!add schedules to get the genepool to a maximum"""
 
-		# get new schedules from the Mutator.mutateSchedule function(WIP
-		for i in range(0, 10):
-			self.schedules.append(Mutator.mutateSchedule(
-				self.schedules[i]))  # this should mutate the schedule and add it to the end of a list
+		print("Refreshing pool contains ", len(self.schedules), "/", GenePool.maxNumOfSchedules)
+
+		# get new schedules from the Mutator.mutateSchedule function(WIP)
+		while len(self.schedules) < GenePool.maxNumOfSchedules:
+			self.schedules.append(Mutator.mutateSchedule(self.schedules[0]))  # this should mutate the schedule and add it to the end of a list
 
 	def getBestSchedule(self):
 		"""Return highest rated schedule

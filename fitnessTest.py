@@ -1,6 +1,6 @@
 from random import randrange
 
-import genepool
+from genepool import GenePool
 from vessels import Vessels
 
 from datetime import datetime
@@ -9,20 +9,20 @@ import util
 
 
 class FitnessTest:
-	#Weighting  #TODO setup weighting
+	# Weighting  #TODO setup weighting
 	bonusPerHourTillDeadline = 5
 	penaltyPerHourOverDeadline = 10
 	penaltyPerHourOverlapping = 10
 	penaltyPerHourIdle = 2
 
-
 	@staticmethod
-	def testPool(genePool):
+	def testPool(genepool):
 		"""! tests every schedule in the genePool that is passed to it
-		:param genePool: genepool containing the schedules to be tested
+		:param genepool: genepool containing the schedules to be tested
 		"""
-		assert isinstance(genePool, genepool.GenePool)
-		for schedule in genePool.getSchedules():
+		assert isinstance(genepool, GenePool)
+		print("Testing ", len(genepool.schedules), " schedules")
+		for schedule in genepool.getSchedules():
 			FitnessTest.testSchedule(schedule)
 
 	@staticmethod
@@ -32,14 +32,21 @@ class FitnessTest:
 		Tests a single schedule for it's fitness
 		:param schedule: schedule to be tested
 		"""
-		print("Testing schedule ", schedule.id)
+		# print("Testing schedule ", schedule.id)
 
 		fitness = 0.0
+
+		# TODO non random number
+		# currently just added for testing
+
+		# fitness = randrange(-100, 100)  # actual test may produce numbers outside this range
 
 		fitness += FitnessTest.timeToDeadline(schedule)
 		fitness += FitnessTest.isOverDeadline(schedule)
 		fitness += FitnessTest.isOverlapping(schedule)
 		fitness += FitnessTest.checkIdleVessels(schedule)
+
+		# print("score of ", fitness)
 
 		schedule.fitness = fitness
 

@@ -1,3 +1,5 @@
+from datetime import *
+
 from generator import Generator
 from genepool import GenePool
 from productList import ProductList
@@ -6,7 +8,6 @@ from fitnessTest import FitnessTest
 from vessels import Vessels
 from logger import *
 
-from datetime import *
 
 startTime = datetime.now()
 
@@ -36,11 +37,11 @@ generator = Generator(productList.products)
 genepool = GenePool()
 genepool.addSchedule(generator.getNewSchedule())
 
-for _count in range(10):  # temp loop to run algorithm
-    genepool.refreshSchedules()
-    FitnessTest.testPool(genepool)
-    #GenePool.removeSchedules
+for _count in range(1):  # temp loop to run algorithm
+	genepool.refreshSchedules()
+	FitnessTest.testPool(genepool)
+	genepool.removeSchedules()
 
 genepool.getBestSchedule().printSchedule()
 
-print("Ran in ", (datetime.now() - startTime).microseconds/1000000, " seconds")
+print("Ran in ", (datetime.now() - startTime).microseconds / 1000000, " seconds")

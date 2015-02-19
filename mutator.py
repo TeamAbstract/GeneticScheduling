@@ -51,9 +51,9 @@ class Mutator:
 		for index, vessel in enumerate(task.vessels):
 			if randint(0, 100) <= Mutator.percentageChange:
 				task.vessels[index] = randint(0, Vessels.getVesselNum())
-				print("changed ", task.product.name, "vessel to", vessel)
+				# print("changed ", task.product.name, "vessel to", vessel)
 
 			if randint(0, 100) <= Mutator.percentageChange:
 				hoursAdded = str(randint(-12, 12))
 				task.startTime = datetime.combine(task.startTime, util.getTimeObject(hoursAdded))
-				print("Added ", hoursAdded, " hours to task", task.product.name)
+				# print("Added ", hoursAdded, " hours to task", task.product.name)
