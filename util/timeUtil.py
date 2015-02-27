@@ -25,7 +25,7 @@ def getTimeObject(time=None):
 def getDateTimeObject(date=None):
 	"""!create a datetime.date object from various means"""
 	if date is None:  # create empty object
-		return DateTime()
+		return DateTime(datetime.MINYEAR, 1, 1)
 
 	if isinstance(date, str):  # create from str
 		# syntax = "year:month:day:hr:min" seconds probably aren't needed
@@ -51,8 +51,18 @@ def addTimes(time1, time2):
 
 	assert isinstance(time1, Time)
 	assert isinstance(time2, Time)
+	# create temporary time1 to add timedelta to it
+	tempTime = datetime.datetime(datetime.MINYEAR, 1, 1, time1.hour, time1.minute, time1.second)
+
+				# timedelta object from time 2 to add
+	tempTime += datetime.timedelta(0, time2.second, 0, 0, time2.minute, time2.hour)
+	return tempTime.time()
 
 
 def getTotalHours(time):
+	"""! Gets the total number of hours in a datetime object doesn't handle years minutes are the decimal
+	:param time:
+	:return: float for total hours
+	"""
 	assert isinstance(time, DateTime)
-	return time.days * 24 + time.hour
+	return time.day * 24 + time.hour + time.minute / 60

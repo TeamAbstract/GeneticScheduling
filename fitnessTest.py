@@ -14,6 +14,7 @@ class FitnessTest:
 	penaltyPerHourOverDeadline = 10
 	penaltyPerHourOverlapping = 10
 	penaltyPerHourIdle = 2
+	totalTimeWeight = -1
 
 	@staticmethod
 	def testPool(genepool):
@@ -45,6 +46,7 @@ class FitnessTest:
 		fitness += FitnessTest.isOverDeadline(schedule)
 		fitness += FitnessTest.isOverlapping(schedule)
 		fitness += FitnessTest.checkIdleVessels(schedule)
+		fitness += util.getTotalHours(FitnessTest.getTotalTime(schedule)) * FitnessTest.totalTimeWeight
 
 		# print("score of ", fitness)
 
@@ -78,7 +80,7 @@ class FitnessTest:
 		score = 0
 		for index1, task in enumerate(schedule.tasks):
 			for nextTask in schedule.tasks[index1+1:]:
-				hoursOverlapping = task.startTime - datetime.combine(task.getEndTime(), task.coolDown)
+				hoursOverlapping = task.startTime - datetime.combine(task.getEndTime(), task.cleanTime)
 				if task.getVessel == nextTask.getVessel and hoursOverlapping > 0:
 					score += hoursOverlapping * FitnessTest.penaltyPerHourOverlapping
 		return score
@@ -96,7 +98,10 @@ class FitnessTest:
 						score += (task.getStartTime() - timeCurrent).getTotalHours() * FitnessTest.penaltyPerHourIdle
 		return score
 
-
-
-
-
+	@staticmethod
+	def getTotalTime(schedule):
+		time = util.getDateTimeObject()
+		for Vessel in Vessels.vessels:
+			for task in schedule.tasks:
+				time = time.combine(time, util.addTimes(task.product.brewTime, task.cleanTime))
+		return time
