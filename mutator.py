@@ -30,7 +30,7 @@ class Mutator:
 		newSchedule.id = Schedule.getNextID()
 		assert isinstance(newSchedule, Schedule)
 
-		for index, task in enumerate(newSchedule.getTask()):
+		for index, task in enumerate(newSchedule.tasks):
 			if randint(0, 100) >= Mutator.percentageChange:
 				continue
 			Mutator.mutateTask(newSchedule.getTask(index))

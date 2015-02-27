@@ -5,7 +5,10 @@ import traceback
 
 
 def getTimeObject(time=None):
-	"""!create a datetime.time object from various means"""
+	"""!create a datetime.time object from various means
+	0:30  = half hour
+	1:10 = 1 hour 10
+	"""
 	if time is None:  # create empty object
 		return Time()
 
@@ -17,8 +20,7 @@ def getTimeObject(time=None):
 	if len(timeSignature) == 1:
 		timeObject = Time(int(timeSignature[0]) % 24)
 	if len(timeSignature) == 2:
-		timeObject = Time(int(timeSignature[0]) % 24,
-						  int(timeSignature[1]) % 60)
+		timeObject = Time(int(timeSignature[0]) % 24, int(timeSignature[1]) % 60)
 	return timeObject
 
 
@@ -35,8 +37,7 @@ def getDateTimeObject(date=None):
 		if len(dateSignature) == 1:
 			return DateTime(int(dateSignature[0]), int(dateSignature[1]))
 		if len(dateSignature) == 2:
-			return DateTime(int(dateSignature[0]),
-			                int(dateSignature[1]))
+			return DateTime(int(dateSignature[0]), int(dateSignature[1]))
 
 	else:
 		raise TypeError("Date object requires no parameter or a datetime.time object")

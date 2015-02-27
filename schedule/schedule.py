@@ -1,5 +1,5 @@
-from PyQt5.QtWidgets import QCalendarWidget
 from schedule.task import Task
+import settings
 
 
 class Schedule:
@@ -24,28 +24,51 @@ class Schedule:
 
 		self.id = Schedule.id
 		Schedule.id += 1
+		self.setCleanTime()
 
-	def getTask(self, index=None):
+	def getTask(self, index):
 		"""Returns a specific task or if id==None then all tasks as a tuple
 		:param index: task to return default = None
 		:return: task or list of tasks
 		"""
-		if index is not None:
-			assert index < len(self.tasks), index
-			assert index >= 0, index
-			return self.tasks[index]
+		assert index < len(self.tasks), index
+		assert index >= 0, index
+		return self.tasks[index]
 
-		else:
-			return tuple(self.tasks)
-
-	def printSchedule(self):
+	def printSchedule(self, printDetails=True):
 		print("Schedule:", self.id, " fitness ", self.fitness)
-		for task in self.tasks:
-			print("Task: ", task.product.name)
-			task.printTask()
+		self.sortByStartTime()
+		if printDetails:
+			for task in self.tasks:
+				print("Task: ", task.product.name)
+				task.printTask()
 		print()
 
 	def addTask(self, task):
 		assert isinstance(task, Task)
 		self.tasks.append(task)
+		self.setCleanTime()
 
+	def sortByStartTime(self):
+		self.tasks.sort(key=lambda task: task.startTime)
+		pass
+
+	def setCleanTime(self):
+		"""! iterates through schedule and sets clean time depending on next schedule
+
+		needs to be called every time a schedule is changed
+		"""
+
+		self.sortByStartTime()
+
+		for index, task in enumerate(self.tasks):
+			if index == len(self.tasks) - 1:  # if last task
+				task.cleanTime = settings.longerCleanTime  # TODO decide if this should be default clean time
+				return
+
+			nextTask = self.tasks[index + 1]
+			if task.product == nextTask.product:
+				task.cleanTime = settings.defaultCleanTime
+			else:  # products are different
+				task.cleanTime = settings.longerCleanTime
+				print("set longer Time")

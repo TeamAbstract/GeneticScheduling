@@ -2,6 +2,7 @@ from random import randrange
 
 from genepool import GenePool
 from vessels import Vessels
+from schedule import Schedule
 
 from datetime import datetime
 
@@ -100,6 +101,13 @@ class FitnessTest:
 
 	@staticmethod
 	def getTotalTime(schedule):
+		"""! return total time that the schedule uses including brewtime and cleaning
+		:param schedule: schedule to test
+		:return:
+		"""
+
+		assert isinstance(schedule, Schedule)
+
 		time = util.getDateTimeObject()
 		for Vessel in Vessels.vessels:
 			for task in schedule.tasks:

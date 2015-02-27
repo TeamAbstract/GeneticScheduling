@@ -58,7 +58,7 @@ class Task:
 		return DateTime.combine(self.startTime, self.product.brewTime)
 
 	def printTask(self):
-		print("  ", self.startTime, " ", self.product.brewTime, " ", self.product.amount, "kegs")
+		print("  ", self.startTime, " ", self.product.brewTime, "+", self.cleanTime, " ", self.product.amount, "kegs")
 		print("   in vessels", str(self.vessels).strip("[]"))
 
 	def getVessel(self):

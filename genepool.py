@@ -26,9 +26,9 @@ class GenePool:
 
 		self.schedules.append(schedule)
 
-	def printPool(self):
+	def printPool(self, printDetails=True):
 		for schedule in self.schedules:
-			schedule.printSchedule()
+			schedule.printSchedule(printDetails)
 
 	def getSchedules(self):
 		return self.schedules

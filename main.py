@@ -37,11 +37,11 @@ generator = Generator(productList.products)
 genepool = GenePool()
 genepool.addSchedule(generator.getNewSchedule())
 
-for _count in range(1):  # temp loop to run algorithm
+for _count in range(10):  # temp loop to run algorithm
 	genepool.refreshSchedules()
 	FitnessTest.testPool(genepool)
 	genepool.removeSchedules()
 
-genepool.getBestSchedule().printSchedule()
+genepool.printPool()
 
 print("Ran in ", (datetime.now() - startTime).microseconds / 1000000, " seconds")
