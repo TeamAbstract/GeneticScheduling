@@ -111,5 +111,6 @@ class FitnessTest:
 		time = util.getDateTimeObject()
 		for Vessel in Vessels.vessels:
 			for task in schedule.tasks:
-				time = time.combine(time, util.addTimes(task.product.brewTime, task.cleanTime))
+				taskTime = util.addTimes(task.product.brewTime, task.cleanTime)
+				time = time.combine(time, taskTime)
 		return time

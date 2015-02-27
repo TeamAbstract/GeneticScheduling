@@ -31,3 +31,6 @@ class Product:
 
 		if self.name == other.name:
 			return True
+
+	def __str__(self):
+		return self.name + str(self.brewTime)
