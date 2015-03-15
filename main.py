@@ -18,17 +18,14 @@ vessels.addVessel(20)
 vessels.addVessel(30)
 vessels.addVessel(50)
 
-for vessel in vessels.vessels:
-	print(vessel.id)
-
-saveHigh('\nlots of issu94des')
-saveHigh('\nlots of other iss7ues')
-saveHigh('\nlots of other iss6ues')
-saveHigh('\nlots of other iss5ues')
-saveHigh('\nlots of other iss1ues')
-saveHigh('\nlots of other issu2es')
-saveHigh('\nlots of other issu3es')
-saveHigh('\nlots of other issu4es')
+# saveHigh('\nlots of issu94des')
+# saveHigh('\nlots of other iss7ues')
+# saveHigh('\nlots of other iss6ues')
+# saveHigh('\nlots of other iss5ues')
+# saveHigh('\nlots of other iss1ues')
+# saveHigh('\nlots of other issu2es')
+# saveHigh('\nlots of other issu3es')
+# saveHigh('\nlots of other issu4es')
 
 # startGUI()
 
@@ -44,11 +41,14 @@ generator = Generator(productList.products)
 genepool = GenePool()
 genepool.addSchedule(generator.getNewSchedule())
 
-for _count in range(10):  # temp loop to run algorithm
+for _count in range(1):  # temp loop to run algorithm
 	genepool.refreshSchedules()
 	FitnessTest.testPool(genepool)
 	genepool.removeSchedules()
 
 genepool.printPool()
+
+print("Best Schedule")
+genepool.getBestSchedule().print()
 
 print("Ran in ", (datetime.now() - startTime).microseconds / 1000000, " seconds")

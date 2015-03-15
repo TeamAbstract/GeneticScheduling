@@ -1,7 +1,8 @@
 from datetime import time as Time
 from datetime import datetime as DateTime
+from datetime import timedelta
 import datetime
-import traceback
+
 
 
 def getTimeObject(time=None):
@@ -65,5 +66,9 @@ def getTotalHours(time):
 	:param time:
 	:return: float for total hours
 	"""
-	assert isinstance(time, DateTime)
-	return time.day * 24 + time.hour + time.minute / 60
+	if isinstance(time, DateTime):
+		return time.day * 24 + time.hour + time.minute / 60
+	elif isinstance(time, timedelta):
+		return time.seconds/3600
+	else:
+		raise TypeError("getTotalHours requires DateTime or timedelta types as a paramater")

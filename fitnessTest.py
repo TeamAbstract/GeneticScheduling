@@ -79,11 +79,23 @@ class FitnessTest:
 	@staticmethod
 	def isOverlapping(schedule):
 		score = 0
-		for index1, task in enumerate(schedule.tasks):
-			for nextTask in schedule.tasks[index1+1:]:
-				hoursOverlapping = task.startTime - datetime.combine(task.getEndTime(), task.cleanTime)
-				if task.getVessel == nextTask.getVessel and hoursOverlapping > 0:
-					score += hoursOverlapping * FitnessTest.penaltyPerHourOverlapping
+		# for x, taskX in enumerate(schedule.tasks[:-1]):
+		# 	for y in range(x + 1, len(schedule.tasks)):
+		# 		taskY = schedule.tasks[y]
+		# 		hoursOverlapping = taskX.startTime - datetime.combine(taskX.getEndTime(), taskX.cleanTime)
+		# 		if taskX.vessels == taskY.vessels and hoursOverlapping.seconds > 0:
+		# 			score -= hoursOverlapping.seconds/3600 * FitnessTest.penaltyPerHourOverlapping
+
+		taskList = schedule.tasks
+		taskList.sort(key=lambda task: task.startTime)
+
+		for index, task in enumerate(taskList[:-1]):
+			nextTask = taskList[index+1]
+			if task.getEndTime() < nextTask.startTime:  # if no overlap
+				continue
+
+			hoursOverlapping = nextTask.getEndTime() - task.startTime
+			score += util.getTotalHours(hoursOverlapping) * FitnessTest.penaltyPerHourOverlapping
 		return score
 
 	@staticmethod

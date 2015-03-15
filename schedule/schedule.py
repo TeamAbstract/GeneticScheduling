@@ -35,7 +35,7 @@ class Schedule:
 		assert index >= 0, index
 		return self.tasks[index]
 
-	def printSchedule(self, printDetails=True):
+	def print(self, printDetails=True):
 		print("Schedule:", self.id, " fitness ", self.fitness)
 		self.sortByStartTime()
 		if printDetails:
