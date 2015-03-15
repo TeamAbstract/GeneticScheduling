@@ -8,6 +8,8 @@ from fitnessTest import FitnessTest
 from vessels import Vessels
 from logger import *
 
+from GUIfirstpass import startGUI
+
 
 startTime = datetime.now()
 
@@ -15,6 +17,9 @@ vessels = Vessels()
 vessels.addVessel(20)
 vessels.addVessel(30)
 vessels.addVessel(50)
+
+for vessel in vessels.vessels:
+	print(vessel.id)
 
 saveHigh('\nlots of issu94des')
 saveHigh('\nlots of other iss7ues')
@@ -24,6 +29,8 @@ saveHigh('\nlots of other iss1ues')
 saveHigh('\nlots of other issu2es')
 saveHigh('\nlots of other issu3es')
 saveHigh('\nlots of other issu4es')
+
+# startGUI()
 
 # temporary will later be called from the GUI
 productList = ProductList()

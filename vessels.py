@@ -16,10 +16,6 @@ class Vessels:
         Vessels.vessels.sort(key=lambda x: x.size)
 
     @staticmethod
-    def getVesselNum():
-        return len(Vessels.vessels)
-
-    @staticmethod
     def getFit(size):
         """! get the smallest vessel index that will fit the size
         :param size: size of order in kegs

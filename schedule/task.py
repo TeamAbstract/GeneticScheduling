@@ -15,7 +15,7 @@ class Task:
 		self.product = product
 		self.vessels = []
 
-		self.cleanTime = util.getTimeObject("1")  # TODO handle cooldown properly, needs to consider change of product
+		self.cleanTime = util.getTimeObject("1")
 
 		if startTime is None:
 			startTime = datetime.datetime.now()

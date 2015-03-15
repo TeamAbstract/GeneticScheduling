@@ -50,7 +50,7 @@ class Mutator:
 		assert isinstance(task, Task)
 		for index, vessel in enumerate(task.vessels):
 			if randint(0, 100) <= Mutator.percentageChange:
-				task.vessels[index] = randint(0, Vessels.getVesselNum())
+				task.vessels[index] = randint(0, len(Vessels.vessels)-1)
 				# print("changed ", task.product.name, "vessel to", vessel)
 
 			if randint(0, 100) <= Mutator.percentageChange:
