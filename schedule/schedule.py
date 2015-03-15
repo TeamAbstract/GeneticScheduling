@@ -1,5 +1,6 @@
 from schedule.task import Task
 import settings
+from copy import deepcopy
 
 
 class Schedule:
@@ -41,7 +42,7 @@ class Schedule:
 		if printDetails:
 			for task in self.tasks:
 				print("Task: ", task.product.name)
-				task.printTask()
+				task.print()
 		print()
 
 	def addTask(self, task):
@@ -72,3 +73,14 @@ class Schedule:
 			else:  # products are different
 				task.cleanTime = settings.longerCleanTime
 				print("set longer Time")
+
+	def splitTask(self, task):
+		"""! splits up two tasks so they can be put into separate vessels
+
+		maintains every other aspect between the two tasks including volume
+		"""
+		if task not in self.tasks:
+			raise AttributeError("task no in this schedule")
+		task.volume /= 2
+		newTask = deepcopy(task)
+		self.tasks.append(task)

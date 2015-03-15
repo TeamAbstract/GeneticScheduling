@@ -48,12 +48,11 @@ class Mutator:
 		# TODO add order splitting i.e. one task over two vessels
 
 		assert isinstance(task, Task)
-		for index, vessel in enumerate(task.vessels):
-			if randint(0, 100) <= Mutator.percentageChange:
-				task.vessels[index] = randint(0, len(Vessels.vessels)-1)
-				# print("changed ", task.product.name, "vessel to", vessel)
+		if randint(0, 100) <= Mutator.percentageChange:
+			task.vessel = Vessels.getRandomVessel(task.volume)
+			# print("changed ", task.product.name, "vessel to", vessel)
 
-			if randint(0, 100) <= Mutator.percentageChange:
-				hoursAdded = str(randint(-12, 12))
-				task.startTime = datetime.combine(task.startTime, util.getTimeObject(hoursAdded))
-				# print("Added ", hoursAdded, " hours to task", task.product.name)
+		if randint(0, 100) <= Mutator.percentageChange:
+			hoursAdded = str(randint(-12, 12))
+			task.startTime = datetime.combine(task.startTime, util.getTimeObject(hoursAdded))
+			# print("Added ", hoursAdded, " hours to task", task.product.name)

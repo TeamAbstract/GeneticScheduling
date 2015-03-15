@@ -104,11 +104,11 @@ class FitnessTest:
 		for vessel in Vessels.vessels:
 			timeCurrent = None
 			for task in schedule.tasks:
-				if task.getVessel() == vessel:
+				if task.vessel == vessel:
 					if timeCurrent is None:
-						timeCurrent = task.getEndTime() + task.Cooldown
+						timeCurrent = datetime.combine(task.getEndTime(), task.cleanTime)
 					else:
-						score += (task.getStartTime() - timeCurrent).getTotalHours() * FitnessTest.penaltyPerHourIdle
+						score += util.getTotalHours(task.startTime - timeCurrent) * FitnessTest.penaltyPerHourIdle
 		return score
 
 	@staticmethod
