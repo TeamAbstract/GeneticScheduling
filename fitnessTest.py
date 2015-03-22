@@ -130,8 +130,10 @@ class FitnessTest:
 		score = 0
 
 		for task in schedule.tasks:
-			if task.startTime.time < settings.openingTime:
+			if task.startTime.time() < settings.openingTime:
 				score += FitnessTest.penaltyForOutOfHours
-			if task.getEndTime() > settings.closingTime:
+				schedule.flags.add("Early")
+			if task.getEndTime().time() > settings.closingTime:
 				score += FitnessTest.penaltyForOutOfHours
+				schedule.flags.add("Late")
 		return score
