@@ -1,4 +1,5 @@
 from datetime import time as Time
+from datetime import timedelta as TimeDelta
 
 import util.timeUtil
 
@@ -13,12 +14,12 @@ class Product:
 		self.dueDate = dueDate
 		self.amount = amount
 
-		if isinstance(brewTime, Time):
+		if isinstance(brewTime, TimeDelta):
 			self.brewTime = brewTime
 		elif isinstance(brewTime, str):
 			self.brewTime = util.timeUtil.getTimeObject(brewTime)
 		else:
-			raise TypeError("Product parameter brewTime requires str or Time object not", type(brewTime))
+			raise TypeError("Product parameter brewTime requires str or timedelta object not", type(brewTime))
 
 	def __eq__(self, other):
 		"""! checks for product equivalence returns True if they are the same
@@ -27,10 +28,10 @@ class Product:
 		:return: True if the same otherwise False
 		"""
 
-		assert isinstance(other, Product), " right operand must also be product"
+		assert isinstance(other, Product), " right operand must be Product"
 
 		if self.name == other.name:
 			return True
 
-	def __str__(self):
-		return self.name + str(self.brewTime)
+	def __repr__(self):
+		return self.name + " " + str(self.brewTime)

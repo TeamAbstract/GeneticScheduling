@@ -53,8 +53,11 @@ class Task:
 		Adds the duration to the time to get the finish time
 		:return: datetime.time for when the task finishes
 		"""
-		return DateTime.combine(self.startTime, self.product.brewTime)
+		return util.addDateTimeAndTime(self.startTime, self.product.brewTime)
 
 	def print(self):
 		print("  ", self.startTime, " ", self.product.brewTime, "+", self.cleanTime, " ", self.volume, "kegs")
 		print("   in vessels", str(self.vessel.id), "(" + str(self.vessel.size) + " kegs)")
+
+	def __repr__(self):
+		return self.product.name + " " + self.startTime

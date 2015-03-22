@@ -45,7 +45,7 @@ def getDateTimeObject(date=None):
 
 
 def addTimes(time1, time2):
-	"""!
+	"""! add two time objects together
 	:param time1: Time object
 	:param time2: Time object
 	:return: Combined time object
@@ -56,9 +56,16 @@ def addTimes(time1, time2):
 	# create temporary time1 to add timedelta to it
 	tempTime = datetime.datetime(datetime.MINYEAR, 1, 1, time1.hour, time1.minute, time1.second)
 
-				# timedelta object from time 2 to add
+	# timedelta object from time 2 to add
 	tempTime += datetime.timedelta(0, time2.second, 0, 0, time2.minute, time2.hour)
 	return tempTime.time()
+
+
+def addDateTimeAndTime(date, time):
+	assert isinstance(date, DateTime)
+	assert isinstance(time, Time)
+
+	return date.combine(date, addTimes(date.time(), time))
 
 
 def getTotalHours(time):

@@ -4,7 +4,6 @@ from datetime import datetime
 
 import util
 
-import schedule
 from schedule.schedule import Schedule
 from schedule.task import Task
 from vessels import Vessels
@@ -21,8 +20,8 @@ class Mutator:
 	@staticmethod
 	def mutateSchedule(schedule):
 		"""! randomly modifies a schedule and returns the changed version
-			:rtype : object
 			:param schedule: schedule to be mutated
+			:type schedule: Schedule
 			:return: modified schedule
 			"""
 		assert isinstance(schedule, Schedule)
@@ -42,6 +41,7 @@ class Mutator:
 		"""! mutates a single task
 		Currently a purely random mutate, more efficient ones can be implemented in the future
 		:param task: task to be mutated
+		:type task: Task
 		"""
 
 		# TODO more efficient mutate i.e. not mostly random
@@ -57,5 +57,5 @@ class Mutator:
 		# change start time
 		if randint(0, 100) <= Mutator.percentageChange:
 			hoursAdded = str(randint(-12, 12))
-			task.startTime = datetime.combine(task.startTime, util.getTimeObject(hoursAdded))
+			task.startTime = util.addDateTimeAndTime(task.startTime, util.getTimeObject(hoursAdded))
 			# print("Added ", hoursAdded, " hours to task", task.product.name)

@@ -41,13 +41,13 @@ generator = Generator(productList.products)
 genepool = GenePool()
 genepool.addSchedule(generator.getNewSchedule())
 
-for _count in range(10):  # temp loop to run algorithm
+for _count in range(100):  # temp loop to run algorithm
 	genepool.refreshSchedules()
 	FitnessTest.testPool(genepool)
 	print("Best result", genepool.getBestSchedule().fitness)
 	genepool.removeSchedules()
 
-genepool.printPool()
+# genepool.printPool()
 
 print("Best Schedule")
 genepool.getBestSchedule().print()
