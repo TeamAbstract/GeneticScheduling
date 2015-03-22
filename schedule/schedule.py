@@ -26,6 +26,7 @@ class Schedule:
 		self.id = Schedule.id
 		Schedule.id += 1
 		self.setCleanTime()
+		self.flags = set()
 
 	def getTask(self, index):
 		"""Returns a specific task or if id==None then all tasks as a tuple
@@ -37,7 +38,7 @@ class Schedule:
 		return self.tasks[index]
 
 	def print(self, printDetails=True):
-		print("Schedule:", self.id, " fitness ", self.fitness)
+		print("Schedule:", self.id, " fitness ", self.fitness, self.flags if len(self.flags) > 0 else "")
 		self.sortByStartTime()
 		if printDetails:
 			for task in self.tasks:

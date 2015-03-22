@@ -7,15 +7,17 @@ from schedule import Schedule
 from datetime import datetime
 
 import util
+import settings
 
 
 class FitnessTest:
 	# Weighting  #TODO setup weighting
 	bonusPerHourTillDeadline = 5
-	penaltyPerHourOverDeadline = 10
-	penaltyPerHourOverlapping = 10
-	penaltyPerHourIdle = 2
+	penaltyPerHourOverDeadline = -10
+	penaltyPerHourOverlapping = -10
+	penaltyPerHourIdle = -2
 	totalTimeWeight = -1
+	penaltyForOutOfHours = -20
 
 	@staticmethod
 	def testPool(genepool):
@@ -29,7 +31,7 @@ class FitnessTest:
 
 	@staticmethod
 	def testSchedule(schedule):
-		# TODO maybe add more requirements
+		# TODO more requirements
 		"""
 		Tests a single schedule for it's fitness
 		:param schedule: schedule to be tested
@@ -38,16 +40,14 @@ class FitnessTest:
 
 		fitness = 0.0
 
-		# TODO non random number
-		# currently just added for testing
-
-		# fitness = randrange(-100, 100)  # actual test may produce numbers outside this range
+		schedule.flags = set()
 
 		fitness += FitnessTest.timeToDeadline(schedule)
 		fitness += FitnessTest.isOverDeadline(schedule)
 		fitness += FitnessTest.isOverlapping(schedule)
 		fitness += FitnessTest.checkIdleVessels(schedule)
-		fitness += util.getTotalHours(FitnessTest.getTotalTime(schedule)) * FitnessTest.totalTimeWeight
+		fitness += FitnessTest.testTotalTime(schedule)
+		fitness += FitnessTest.testOutOfHours(schedule)
 
 		# print("score of ", fitness)
 
@@ -79,13 +79,6 @@ class FitnessTest:
 	@staticmethod
 	def isOverlapping(schedule):
 		score = 0
-		# for x, taskX in enumerate(schedule.tasks[:-1]):
-		# 	for y in range(x + 1, len(schedule.tasks)):
-		# 		taskY = schedule.tasks[y]
-		# 		hoursOverlapping = taskX.startTime - datetime.combine(taskX.getEndTime(), taskX.cleanTime)
-		# 		if taskX.vessels == taskY.vessels and hoursOverlapping.seconds > 0:
-		# 			score -= hoursOverlapping.seconds/3600 * FitnessTest.penaltyPerHourOverlapping
-
 		taskList = schedule.tasks
 		taskList.sort(key=lambda task: task.startTime)
 
@@ -93,7 +86,7 @@ class FitnessTest:
 			nextTask = taskList[index+1]
 			if task.getEndTime() < nextTask.startTime:  # if no overlap
 				continue
-
+			schedule.flags.add("Olap")
 			hoursOverlapping = nextTask.getEndTime() - task.startTime
 			score += util.getTotalHours(hoursOverlapping) * FitnessTest.penaltyPerHourOverlapping
 		return score
@@ -112,17 +105,33 @@ class FitnessTest:
 		return score
 
 	@staticmethod
-	def getTotalTime(schedule):
+	def testTotalTime(schedule):
 		"""! return total time that the schedule uses including brewtime and cleaning
 		:param schedule: schedule to test
-		:return:
+		:return: score from test
 		"""
 
 		assert isinstance(schedule, Schedule)
 
-		time = util.getDateTimeObject()
-		for Vessel in Vessels.vessels:
-			for task in schedule.tasks:
-				taskTime = util.addTimes(task.product.brewTime, task.cleanTime)
-				time = time.combine(time, taskTime)
-		return time
+		totalTime = util.getDateTimeObject()
+		for task in schedule.tasks:
+			taskTime = util.addTimes(task.product.brewTime, task.cleanTime)
+			totalTime = totalTime.combine(totalTime, taskTime)
+		return util.getTotalHours(totalTime) * FitnessTest.totalTimeWeight
+
+	@staticmethod
+	def testOutOfHours(schedule):
+		"""! Check if the schedule has anything finishing out of hours
+		:param schedule: schedule to test
+		:return: score from test
+		"""
+		assert isinstance(schedule, Schedule)
+
+		score = 0
+
+		for task in schedule.tasks:
+			if task.startTime.time < settings.openingTime:
+				score += FitnessTest.penaltyForOutOfHours
+			if task.getEndTime() > settings.closingTime:
+				score += FitnessTest.penaltyForOutOfHours
+		return score

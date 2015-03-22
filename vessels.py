@@ -1,5 +1,6 @@
 import random
 
+
 class Vessels:
 	"""!
 	Class that stores list of vessels as a static variable
@@ -18,7 +19,7 @@ class Vessels:
 
 	@staticmethod
 	def getFit(size):
-		"""! get the smallest vessel index that will fit the size
+		"""! get the smallest vessel that will fit the size
 		:param size: size of order in kegs
 		:return: integer index of the vessel or list of vessel indexes
 		"""
@@ -35,7 +36,7 @@ class Vessels:
 		if size is None:
 			return vessel
 		while True:
-			if vessel.size < size:
+			if size < vessel.size:
 				return vessel
 			if choice == len(Vessels.vessels)-1:  # if largest vessel
 				return vessel
