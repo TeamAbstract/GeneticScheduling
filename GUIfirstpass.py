@@ -3,13 +3,22 @@ import sys
 from PyQt4 import QtGui
 from PyQt4.QtCore import Qt
 
+mainStyle = "color: white; background:rgb(0,104,95); border: 2px solid white"
+
 
 class CustomButton(QtGui.QPushButton):
 	def __init__(self, text, pos, instance):
 		super().__init__(text, instance)
 		self.resize(self.sizeHint())
 		self.move(pos[0], pos[1])
-		self.setStyleSheet("color: white; background:rgb(0,104,95); border: 2px solid white")
+		self.setStyleSheet(mainStyle)
+
+
+class CustomLabel(QtGui.QLabel):
+	def __init__(self, text, pos, instance):
+		super().__init__(text, instance)
+		self.move(pos[0], pos[1])
+		self.setStyleSheet("color : white;" "font-size: 12pt")
 
 
 class interface(QtGui.QWidget):
@@ -26,38 +35,22 @@ class interface(QtGui.QWidget):
 		submitBtn = CustomButton('Submit', (310, 325), self)
 		removeBtn = CustomButton('Remove', (540, 325), self)
 
-#Labels
-		productLabel = QtGui.QLabel('Product', self)
-		productLabel.move(75, 40)
-		productLabel.setStyleSheet("color : white;" "font-size: 12pt")
-
-		quantityLabel = QtGui.QLabel('Quantity', self)
-		quantityLabel.move(75, 250)
-		quantityLabel.setStyleSheet("color : white;" "font-size: 12pt")
-
-		timeLabel = QtGui.QLabel('Time', self)
-		timeLabel.move(310, 40)
-		timeLabel.setStyleSheet("color : white;" "font-size: 12pt")
-
-		dateLabel = QtGui.QLabel('Date', self)
-		dateLabel.move(310, 110)
-		dateLabel.setStyleSheet("color : white;" "font-size: 12pt")
-
-		ordersLabel = QtGui.QLabel('Orders', self)
-		ordersLabel.move(550, 40)
-		ordersLabel.setStyleSheet("color : white;" "font-size: 12pt")
+# Labels
+		productLabel = CustomLabel('Product', (75, 40), self)
+		quantityLabel = CustomLabel('Quantity', (75, 250), self)
+		timeLabel = CustomLabel('Time', (310, 40), self)
+		dateLabel = CustomLabel('Date', (310, 110), self)
+		ordersLabel = CustomLabel('Orders', (550, 40), self)
 
 
-#Lists
+# Lists
 		productList = QtGui.QListWidget(self)
 		productList.move(0, 75)
 		productList.setFixedWidth(227)
 		productList.setMaximumHeight(175)
-		productList.setStyleSheet("color : white;"
-		                          "background:rgb(0,104,95);"
-		                          "border: 2px solid white")
+		productList.setStyleSheet(mainStyle)
 
-#Rename at some point
+# TODO Rename at some point
 		productList.addItem("Beer 1")
 		productList.addItem("Beer 2")
 		productList.addItem("Beer 3")
@@ -73,9 +66,7 @@ class interface(QtGui.QWidget):
 		orderList.move(self.width() / 3 * 2 + 33, 75)
 		orderList.setFixedWidth(227)
 		orderList.setFixedHeight(200)
-		orderList.setStyleSheet("color : white;"
-		                        "background:rgb(0,104,95);"
-		                        "border: 2px solid white")
+		orderList.setStyleSheet(mainStyle)
 
 #example orders
 		orderList.addItem("Carlsberg  12/09/15 12:00")
@@ -94,9 +85,7 @@ class interface(QtGui.QWidget):
 
 		hourSelect = QtGui.QComboBox(self)
 		hourSelect.move(270, 70)
-		hourSelect.setStyleSheet("color : white;"
-		                         "background:rgb(0,104,95);"
-		                         "border: 2px solid white")
+		hourSelect.setStyleSheet(mainStyle)
 		hourSelect.setFixedWidth(150)
 		hourSelect.addItem("00:00")
 		hourSelect.addItem("01:00")
@@ -153,7 +142,6 @@ class interface(QtGui.QWidget):
 		qp.drawLine(0, 22, 683, 22)
 		qp.drawLine(self.width() / 3, 22, self.width() / 3, self.height())
 		qp.drawLine(self.width() / 3 * 2 + 5, 22, self.width() / 3 * 2 + 5, self.height())
-
 
 
 def startGUI():
