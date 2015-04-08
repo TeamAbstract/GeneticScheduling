@@ -27,7 +27,7 @@ vessels.addVessel(50)
 # saveHigh('\nlots of other issu3es')
 # saveHigh('\nlots of other issu4es')
 
-# startGUI()
+startGUI()
 
 # temporary will later be called from the GUI
 productList = ProductList()
@@ -41,7 +41,7 @@ generator = Generator(productList.products)
 genepool = GenePool()
 genepool.addSchedule(generator.getNewSchedule())
 
-for _count in range(100):  # temp loop to run algorithm
+for _count in range(200):  # temp loop to run algorithm
 	genepool.refreshSchedules()
 	FitnessTest.testPool(genepool)
 	print("Best result", genepool.getBestSchedule().fitness)

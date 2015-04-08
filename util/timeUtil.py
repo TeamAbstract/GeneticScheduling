@@ -1,6 +1,7 @@
 from datetime import time as Time
+from datetime import date as Date
 from datetime import datetime as DateTime
-from datetime import timedelta
+from datetime import timedelta as TimeDelta
 import datetime
 
 
@@ -44,11 +45,28 @@ def getDateTimeObject(date=None):
 		raise TypeError("Date object requires no parameter or a datetime.time object")
 
 
+def getTimeDeltaObject(timeDelta="0"):
+
+	# hr:min:s format
+	if isinstance(timeDelta, str):
+		timeDelta = timeDelta.split(":")
+		if len(timeDelta) == 1:
+			return TimeDelta(hours=int(timeDelta[0]))
+		if len(timeDelta) == 2:
+			return TimeDelta(hours=int(timeDelta[0]),
+							 minutes=int(timeDelta[1]))
+		if len(timeDelta) == 3:
+			return TimeDelta(hours=int(timeDelta[0]),
+							 minutes=int(timeDelta[1]),
+							 seconds=int(timeDelta[2]))
+
+
 def addTimes(time1, time2):
 	"""! add two time objects together
 	:param time1: Time object
 	:param time2: Time object
 	:return: Combined time object
+	:rtype: Time
 	"""
 
 	assert isinstance(time1, Time)
@@ -68,6 +86,21 @@ def addDateTimeAndTime(date, time):
 	return date.combine(date, addTimes(date.time(), time))
 
 
+def addTimeAndTimeDelta(time, timedelta):
+	"""! add time object and timedelta
+	:param time:
+	:param timedelta:
+	:return: resulting time object
+	:rtype: Time
+	"""
+
+	assert isinstance(time, Time), type(time)
+	assert isinstance(timedelta, TimeDelta)
+
+	result = DateTime.combine(Date.today(), time) + timedelta
+	return result.time()
+
+
 def getTotalHours(time):
 	"""! Gets the total number of hours in a datetime object doesn't handle years minutes are the decimal
 	:param time:
@@ -75,7 +108,7 @@ def getTotalHours(time):
 	"""
 	if isinstance(time, DateTime):
 		return time.day * 24 + time.hour + time.minute / 60
-	elif isinstance(time, timedelta):
+	elif isinstance(time, TimeDelta):
 		return time.seconds/3600
 	else:
 		raise TypeError("getTotalHours requires DateTime or timedelta types as a paramater")

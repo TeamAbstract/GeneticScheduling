@@ -1,5 +1,8 @@
 from schedule.task import Task
+from datetime import timedelta as TimeDelta
 import settings
+import util
+
 from copy import deepcopy
 
 
@@ -23,8 +26,7 @@ class Schedule:
 		self.fitness = 0.0
 		self.tasks = []
 
-		self.id = Schedule.id
-		Schedule.id += 1
+		self.id = Schedule.getNextID()
 		self.setCleanTime()
 		self.flags = set()
 
@@ -73,7 +75,6 @@ class Schedule:
 				task.cleanTime = settings.defaultCleanTime
 			else:  # products are different
 				task.cleanTime = settings.longerCleanTime
-				print("set longer Time")
 
 	def splitTask(self, task):
 		"""! splits up two tasks so they can be put into separate vessels
@@ -81,7 +82,22 @@ class Schedule:
 		maintains every other aspect between the two tasks including volume
 		"""
 		if task not in self.tasks:
-			raise AttributeError("task no in this schedule")
+			raise AttributeError("task not in this schedule")
 		task.volume /= 2
 		newTask = deepcopy(task)
-		self.tasks.append(task)
+		self.tasks.append(newTask)
+
+	def getTotalTime(self):
+		"""! gets the total number of hours that the schedule is operating for
+		:return: total time
+		:rtype: TimeDelta
+		"""
+
+		totalTime = util.getTimeDeltaObject()
+
+		for task in self.tasks:
+			totalTime += task.product.brewTime + task.cleanTime
+		return totalTime
+
+	def __repr__(self):
+		return str(self.fitness)

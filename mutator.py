@@ -1,6 +1,7 @@
 from copy import deepcopy
 from random import randint
-from datetime import datetime
+
+import settings
 
 import util
 
@@ -15,7 +16,7 @@ class Mutator:
 	"""
 
 	# static variables for settings
-	percentageChange = 100  # chance of a variable being changed(0-100)
+	percentageChange = 50  # chance of a variable being changed(0-100)
 
 	@staticmethod
 	def mutateSchedule(schedule):
@@ -27,6 +28,7 @@ class Mutator:
 		assert isinstance(schedule, Schedule)
 		newSchedule = deepcopy(schedule)
 		newSchedule.id = Schedule.getNextID()
+		newSchedule.fitness = None
 		assert isinstance(newSchedule, Schedule)
 
 		for index, task in enumerate(newSchedule.tasks):
@@ -34,6 +36,7 @@ class Mutator:
 				continue
 			Mutator.mutateTask(newSchedule.getTask(index))
 
+		newSchedule.setCleanTime()
 		return newSchedule
 
 	@staticmethod
@@ -56,6 +59,8 @@ class Mutator:
 
 		# change start time
 		if randint(0, 100) <= Mutator.percentageChange:
-			hoursAdded = str(randint(-12, 12))
-			task.startTime = util.addDateTimeAndTime(task.startTime, util.getTimeObject(hoursAdded))
+			task.startTime = task.startTime + util.getTimeDeltaObject(str(randint(-12, 12)))
+			while not settings.openingTime < task.startTime.time() < util.addTimeAndTimeDelta(settings.closingTime, task.getDuration()):
+				task.startTime = task.startTime + util.getTimeDeltaObject(str(randint(-12, 12)))
+
 			# print("Added ", hoursAdded, " hours to task", task.product.name)

@@ -4,45 +4,27 @@ from PyQt4 import QtGui
 from PyQt4.QtCore import Qt
 
 
+class CustomButton(QtGui.QPushButton):
+	def __init__(self, text, pos, instance):
+		super().__init__(text, instance)
+		self.resize(self.sizeHint())
+		self.move(pos[0], pos[1])
+		self.setStyleSheet("color: white; background:rgb(0,104,95); border: 2px solid white")
+
+
 class interface(QtGui.QWidget):
 	def __init__(self):
 		super(interface, self).__init__()
-
 		self.initUI()
 
 	def initUI(self):
 		self.setStyleSheet("background:rgb(0,104,95);")
 
 # Buttons
-		newOrderBtn = QtGui.QPushButton('New Order', self)
-		newOrderBtn.resize(newOrderBtn.sizeHint())
-		newOrderBtn.move(0, 0)
-
-		newOrderBtn.setStyleSheet("color : white;"
-		                          "background:rgb(0,104,95);"
-		                          "border: 2px solid white")
-
-		scheduleBtn = QtGui.QPushButton('Schedule', self)
-		scheduleBtn.resize(scheduleBtn.sizeHint())
-		scheduleBtn.move(608, 0)
-		scheduleBtn.setStyleSheet("color : white;"
-		                          "background:rgb(0,104,95);"
-		                          "border: 2px solid white")
-
-		submitBtn = QtGui.QPushButton('Submit', self)
-		submitBtn.resize(submitBtn.sizeHint())
-		submitBtn.move(310, 325)
-		submitBtn.setStyleSheet("color : white;"
-		                        "background:rgb(0,104,95);"
-		                        "border: 2px solid white")
-
-		removeBtn = QtGui.QPushButton('Remove', self)
-		removeBtn.resize(removeBtn.sizeHint())
-		removeBtn.move(540, 325)
-		removeBtn.setStyleSheet("color : white;"
-		                        "background:rgb(0,104,95);"
-		                        "border: 2px solid white")
-
+		newOrderBtn = CustomButton('New Order', (0, 0), self)
+		scheduleBtn = CustomButton('Schedule', (608, 0), self)
+		submitBtn = CustomButton('Submit', (310, 325), self)
+		removeBtn = CustomButton('Remove', (540, 325), self)
 
 #Labels
 		productLabel = QtGui.QLabel('Product', self)

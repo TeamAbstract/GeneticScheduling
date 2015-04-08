@@ -1,13 +1,10 @@
-from random import randrange
-
 from genepool import GenePool
 from vessels import Vessels
 from schedule import Schedule
 
-from datetime import datetime
-
 import util
 import settings
+from datetime import datetime as DateTime
 
 
 class FitnessTest:
@@ -18,6 +15,7 @@ class FitnessTest:
 	penaltyPerHourIdle = -2
 	totalTimeWeight = -1
 	penaltyForOutOfHours = -20
+	percentageTimeUsedWeight = 5
 
 	@staticmethod
 	def testPool(genepool):
@@ -26,8 +24,9 @@ class FitnessTest:
 		:type genepool: GenePool
 		"""
 		assert isinstance(genepool, GenePool)
-		print("Testing ", len(genepool.schedules), " schedules")
-		for schedule in genepool.getSchedules():
+		# print("Testing ", len(genepool.schedules), " schedules")
+
+		for schedule in genepool.schedules:
 			FitnessTest.testSchedule(schedule)
 
 	@staticmethod
@@ -40,7 +39,7 @@ class FitnessTest:
 		"""
 		# print("Testing schedule ", schedule.id)
 
-		fitness = 0.0
+		fitness = 100.0
 
 		schedule.flags = set()
 
@@ -50,6 +49,7 @@ class FitnessTest:
 		fitness += FitnessTest.checkIdleVessels(schedule)
 		fitness += FitnessTest.testTotalTime(schedule)
 		fitness += FitnessTest.testOutOfHours(schedule)
+		fitness += FitnessTest.testPercentageUsed(schedule)
 
 		# print("score of ", fitness)
 
@@ -105,7 +105,7 @@ class FitnessTest:
 			for task in schedule.tasks:
 				if task.vessel == vessel:
 					if timeCurrent is None:
-						timeCurrent = datetime.combine(task.getEndTime(), task.cleanTime)
+						timeCurrent = task.getEndTime() + task.cleanTime
 					else:
 						score += util.getTotalHours(task.startTime - timeCurrent) * FitnessTest.penaltyPerHourIdle
 		return score
@@ -120,11 +120,28 @@ class FitnessTest:
 
 		assert isinstance(schedule, Schedule)
 
-		totalTime = util.getDateTimeObject()
-		for task in schedule.tasks:
-			taskTime = util.addTimes(task.product.brewTime, task.cleanTime)
-			totalTime = totalTime.combine(totalTime, taskTime)
-		return util.getTotalHours(totalTime) * FitnessTest.totalTimeWeight
+		return util.getTotalHours(schedule.getTotalTime()) * FitnessTest.totalTimeWeight
+
+	@staticmethod
+	def testPercentageUsed(schedule):
+		"""! checks what percentage of each vessel's time is spent idle
+		:param schedule: schedule to test
+		:type schedule: Schedule
+		:return: score from test
+		"""
+
+		lastTask = schedule.tasks[0]
+		for task in schedule.tasks[1:]:
+			if task.getEndTime() > lastTask.getEndTime():
+				lastTask = task
+
+		totalTime = util.getTotalHours(schedule.getTotalTime())/len(Vessels.vessels)
+		timeToEnd = util.getTotalHours(lastTask.getEndTime() - DateTime.now())
+		return (timeToEnd/totalTime) * FitnessTest.percentageTimeUsedWeight
+
+
+
+
 
 	@staticmethod
 	def testOutOfHours(schedule):
@@ -138,10 +155,10 @@ class FitnessTest:
 		score = 0
 
 		for task in schedule.tasks:
-			if task.startTime.time() < settings.openingTime:
+			if not settings.openingTime < task.startTime.time() < settings.closingTime:
 				score += FitnessTest.penaltyForOutOfHours
-				schedule.flags.add("Early")
-			if task.getEndTime().time() > settings.closingTime:
+				schedule.flags.add("outHs")  # out of hours start
+			if not settings.openingTime < task.getEndTime().time() < settings.closingTime:
 				score += FitnessTest.penaltyForOutOfHours
-				schedule.flags.add("Late")
+				schedule.flags.add("outHe")  # out of hours end
 		return score

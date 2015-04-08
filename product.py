@@ -17,7 +17,7 @@ class Product:
 		if isinstance(brewTime, TimeDelta):
 			self.brewTime = brewTime
 		elif isinstance(brewTime, str):
-			self.brewTime = util.timeUtil.getTimeObject(brewTime)
+			self.brewTime = util.getTimeDeltaObject(brewTime)
 		else:
 			raise TypeError("Product parameter brewTime requires str or timedelta object not", type(brewTime))
 
