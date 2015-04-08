@@ -87,8 +87,6 @@ class interface(QtGui.QWidget):
 		width = self.width() / 3 * 2 + 33
 		self.orderList = CustomList((width, 75), (227, 200), self)
 
-#example orders
-		self.orderList.addItem("Carlsberg  12/09/15 12:00")
 
 #TextBoxes
 
@@ -147,13 +145,17 @@ class interface(QtGui.QWidget):
 		qp.drawLine(rightLineYpos, topLineYpos, rightLineYpos, self.height())
 
 	def submitProduct(self):
-		print("submitting")
-		products = self.productList.selectedItems() # may be more than 1
+		products = self.productList.selectedItems()  # may be more than 1
 		quantity = int(self.quantityTextBox.text())
+		for productIndex in products:
+			product = productList.getByName(productIndex.text())
+			line = product.name + " " + str(quantity) + " barrels " + str(product.brewTime) + " hours"
+			self.orderList.addItem(line)
 
 
 	def newOrder(self):
-		print("new order")
+		pass
+		# self.orderList.remov
 
 	def schedule(self):
 		print("scheduling")
