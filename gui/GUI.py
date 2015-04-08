@@ -145,23 +145,28 @@ class interface(QtGui.QWidget):
 		qp.drawLine(rightLineYpos, topLineYpos, rightLineYpos, self.height())
 
 	def submitProduct(self):
-		products = self.productList.selectedItems()  # may be more than 1
 		quantity = int(self.quantityTextBox.text())
-		for productIndex in products:
+		for productIndex in self.productList.selectedItems():
 			product = productList.getByName(productIndex.text())
 			line = product.name + " " + str(quantity) + " barrels " + str(product.brewTime) + " hours"
 			self.orderList.addItem(line)
 
-
 	def newOrder(self):
-		pass
-		# self.orderList.remov
+		"""deletes all items in the order list and resets state
+		"""
+		for x in reversed(range(self.orderList.count())):
+			self.orderList.takeItem(x)
 
 	def schedule(self):
 		print("scheduling")
 
 	def remove(self):
-		print("removing")
+		for x in reversed(range(self.orderList.count())):
+			item = self.orderList.item(x)
+			assert isinstance(item, QtGui.QListWidgetItem)
+			if item.isSelected():
+				self.orderList.takeItem(x)
+
 
 
 def startGUI():
