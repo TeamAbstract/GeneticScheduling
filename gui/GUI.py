@@ -1,5 +1,8 @@
 import sys
 
+from product import Product
+import productList
+
 from PyQt4 import QtGui
 from PyQt4 import QtCore
 from PyQt4.QtCore import Qt
@@ -13,6 +16,7 @@ class CustomButton(QtGui.QPushButton):
 		self.resize(self.sizeHint())
 		self.move(pos[0], pos[1])
 		self.setStyleSheet(mainStyle)
+
 		if function is not None:
 			self.addCallback(function)
 
@@ -27,6 +31,11 @@ class CustomLabel(QtGui.QLabel):
 		self.setStyleSheet("color : white;" "font-size: 12pt")
 
 
+class CustomListItem(QtGui.QListWidget):
+	def __init__(self):
+		super().__init__()
+
+
 class CustomList(QtGui.QListWidget):
 	def __init__(self, pos, size, instance):
 		super().__init__(instance)
@@ -34,6 +43,16 @@ class CustomList(QtGui.QListWidget):
 		self.setFixedWidth(size[0])
 		self.setMaximumHeight(size[1])
 		self.setStyleSheet(mainStyle)
+
+
+class ProductList(CustomList):
+	def __init__(self, pos, size, instance):
+		super().__init__(pos, size, instance)
+		self.products = []
+
+	def addItem(self, product):
+		assert isinstance(product, Product)
+		self.products.append(product)
 
 
 class interface(QtGui.QWidget):
@@ -62,16 +81,8 @@ class interface(QtGui.QWidget):
 		self.productList = CustomList((0, 75), (227, 175), self)
 
 # TODO Rename at some point
-		self.productList.addItem("Beer 1")
-		self.productList.addItem("Beer 2")
-		self.productList.addItem("Beer 3")
-		self.productList.addItem("Beer 4")
-		self.productList.addItem("Beer 5")
-		self.productList.addItem("Beer 6")
-		self.productList.addItem("Beer 7")
-		self.productList.addItem("Beer 8")
-		self.productList.addItem("Beer 9")
-		self.productList.addItem("Beer 10")
+		for product in productList.masterProductList:
+			self.productList.addItem(product.name)
 
 		width = self.width() / 3 * 2 + 33
 		self.orderList = CustomList((width, 75), (227, 200), self)
@@ -81,11 +92,11 @@ class interface(QtGui.QWidget):
 
 #TextBoxes
 
-		quantityTextBox = QtGui.QLineEdit(self)
-		quantityTextBox.move(0, 280)
-		quantityTextBox.setText("0")
-		quantityTextBox.setFixedWidth(self.orderList.width())
-		quantityTextBox.setStyleSheet(mainStyle)
+		self.quantityTextBox = QtGui.QLineEdit(self)
+		self.quantityTextBox.move(0, 280)
+		self.quantityTextBox.setText("0")
+		self.quantityTextBox.setFixedWidth(self.orderList.width())
+		self.quantityTextBox.setStyleSheet(mainStyle)
 
 
 #Time and Date Selection
@@ -137,6 +148,9 @@ class interface(QtGui.QWidget):
 
 	def submitProduct(self):
 		print("submitting")
+		products = self.productList.selectedItems() # may be more than 1
+		quantity = int(self.quantityTextBox.text())
+
 
 	def newOrder(self):
 		print("new order")

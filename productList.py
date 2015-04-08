@@ -1,16 +1,8 @@
 from product import Product
 
 
-class ProductList:
-    """!
-    General storage for products that need to be added to a schedule may be removed once GUI is added
-    """
-
-    def __init__(self):
-        self.products = []
-
-    def addProduct(self, product):
-        if isinstance(product, Product):
-            self.products.append(product)
-        else:
-            print("Add product requires a product")
+masterProductList = [
+	Product("Booze", "1", 10),
+	Product("Hooch", "2", 30),
+	Product("Brew", "4", 15),
+	Product("Beer", "4", 60)]
