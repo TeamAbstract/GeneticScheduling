@@ -1,17 +1,23 @@
 import sys
 
 from PyQt4 import QtGui
+from PyQt4 import QtCore
 from PyQt4.QtCore import Qt
 
 mainStyle = "color: white; background:rgb(0,104,95); border: 2px solid white"
 
 
 class CustomButton(QtGui.QPushButton):
-	def __init__(self, text, pos, instance):
+	def __init__(self, text, pos, instance, function=None):
 		super().__init__(text, instance)
 		self.resize(self.sizeHint())
 		self.move(pos[0], pos[1])
 		self.setStyleSheet(mainStyle)
+		if function is not None:
+			self.addCallback(function)
+
+	def addCallback(self, function):
+		self.connect(self, QtCore.SIGNAL("clicked()"), function)
 
 
 class CustomLabel(QtGui.QLabel):
@@ -30,10 +36,10 @@ class interface(QtGui.QWidget):
 		self.setStyleSheet("background:rgb(0,104,95);")
 
 # Buttons
-		newOrderBtn = CustomButton('New Order', (0, 0), self)
-		scheduleBtn = CustomButton('Schedule', (608, 0), self)
-		submitBtn = CustomButton('Submit', (310, 325), self)
-		removeBtn = CustomButton('Remove', (540, 325), self)
+		newOrderBtn = CustomButton('New Order', (0, 0), self, self.newOrder)
+		scheduleBtn = CustomButton('Schedule', (608, 0), self, self.schedule)
+		submitBtn = CustomButton('Submit', (310, 325), self, self.submitProduct)
+		removeBtn = CustomButton('Remove', (540, 325), self, self.remove)
 
 # Labels
 		productLabel = CustomLabel('Product', (75, 40), self)
@@ -87,30 +93,8 @@ class interface(QtGui.QWidget):
 		hourSelect.move(270, 70)
 		hourSelect.setStyleSheet(mainStyle)
 		hourSelect.setFixedWidth(150)
-		hourSelect.addItem("00:00")
-		hourSelect.addItem("01:00")
-		hourSelect.addItem("02:00")
-		hourSelect.addItem("03:00")
-		hourSelect.addItem("04:00")
-		hourSelect.addItem("05:00")
-		hourSelect.addItem("06:00")
-		hourSelect.addItem("07:00")
-		hourSelect.addItem("08:00")
-		hourSelect.addItem("09:00")
-		hourSelect.addItem("10:00")
-		hourSelect.addItem("11:00")
-		hourSelect.addItem("12:00")
-		hourSelect.addItem("13:00")
-		hourSelect.addItem("14:00")
-		hourSelect.addItem("15:00")
-		hourSelect.addItem("16:00")
-		hourSelect.addItem("17:00")
-		hourSelect.addItem("18:00")
-		hourSelect.addItem("19:00")
-		hourSelect.addItem("20:00")
-		hourSelect.addItem("21:00")
-		hourSelect.addItem("22:00")
-		hourSelect.addItem("23:00")
+		for hour in range(0, 23):
+			hourSelect.addItem(str(hour).zfill(2) + ":00")
 
 		datePicker = QtGui.QCalendarWidget(self)
 		datePicker.move(228, 150)
@@ -143,6 +127,17 @@ class interface(QtGui.QWidget):
 		qp.drawLine(self.width() / 3, 22, self.width() / 3, self.height())
 		qp.drawLine(self.width() / 3 * 2 + 5, 22, self.width() / 3 * 2 + 5, self.height())
 
+	def submitProduct(self):
+		print("submitting")
+
+	def newOrder(self):
+		print("new order")
+
+	def schedule(self):
+		print("scheduling")
+
+	def remove(self):
+		print("removing")
 
 def startGUI():
 	app = QtGui.QApplication(sys.argv)
