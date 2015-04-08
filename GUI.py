@@ -27,6 +27,15 @@ class CustomLabel(QtGui.QLabel):
 		self.setStyleSheet("color : white;" "font-size: 12pt")
 
 
+class CustomList(QtGui.QListWidget):
+	def __init__(self, pos, size, instance):
+		super().__init__(instance)
+		self.move(pos[0], pos[1])
+		self.setFixedWidth(size[0])
+		self.setMaximumHeight(size[1])
+		self.setStyleSheet(mainStyle)
+
+
 class interface(QtGui.QWidget):
 	def __init__(self):
 		super(interface, self).__init__()
@@ -36,55 +45,47 @@ class interface(QtGui.QWidget):
 		self.setStyleSheet("background:rgb(0,104,95);")
 
 # Buttons
-		newOrderBtn = CustomButton('New Order', (0, 0), self, self.newOrder)
-		scheduleBtn = CustomButton('Schedule', (608, 0), self, self.schedule)
-		submitBtn = CustomButton('Submit', (310, 325), self, self.submitProduct)
-		removeBtn = CustomButton('Remove', (540, 325), self, self.remove)
+		self.newOrderBtn = CustomButton('New Order', (0, 0), self, self.newOrder)
+		self.scheduleBtn = CustomButton('Schedule', (608, 0), self, self.schedule)
+		self.submitBtn = CustomButton('Submit', (310, 325), self, self.submitProduct)
+		self.removeBtn = CustomButton('Remove', (540, 325), self, self.remove)
 
 # Labels
-		productLabel = CustomLabel('Product', (75, 40), self)
-		quantityLabel = CustomLabel('Quantity', (75, 250), self)
-		timeLabel = CustomLabel('Time', (310, 40), self)
-		dateLabel = CustomLabel('Date', (310, 110), self)
-		ordersLabel = CustomLabel('Orders', (550, 40), self)
+		self.productLabel = CustomLabel('Product', (75, 40), self)
+		self.quantityLabel = CustomLabel('Quantity', (75, 250), self)
+		self.timeLabel = CustomLabel('Time', (310, 40), self)
+		self.dateLabel = CustomLabel('Date', (310, 110), self)
+		self.ordersLabel = CustomLabel('Orders', (550, 40), self)
 
 
 # Lists
-		productList = QtGui.QListWidget(self)
-		productList.move(0, 75)
-		productList.setFixedWidth(227)
-		productList.setMaximumHeight(175)
-		productList.setStyleSheet(mainStyle)
+		self.productList = CustomList((0, 75), (227, 175), self)
 
 # TODO Rename at some point
-		productList.addItem("Beer 1")
-		productList.addItem("Beer 2")
-		productList.addItem("Beer 3")
-		productList.addItem("Beer 4")
-		productList.addItem("Beer 5")
-		productList.addItem("Beer 6")
-		productList.addItem("Beer 7")
-		productList.addItem("Beer 8")
-		productList.addItem("Beer 9")
-		productList.addItem("Beer 10")
+		self.productList.addItem("Beer 1")
+		self.productList.addItem("Beer 2")
+		self.productList.addItem("Beer 3")
+		self.productList.addItem("Beer 4")
+		self.productList.addItem("Beer 5")
+		self.productList.addItem("Beer 6")
+		self.productList.addItem("Beer 7")
+		self.productList.addItem("Beer 8")
+		self.productList.addItem("Beer 9")
+		self.productList.addItem("Beer 10")
 
-		orderList = QtGui.QListWidget(self)
-		orderList.move(self.width() / 3 * 2 + 33, 75)
-		orderList.setFixedWidth(227)
-		orderList.setFixedHeight(200)
-		orderList.setStyleSheet(mainStyle)
+		width = self.width() / 3 * 2 + 33
+		self.orderList = CustomList((width, 75), (227, 200), self)
 
 #example orders
-		orderList.addItem("Carlsberg  12/09/15 12:00")
+		self.orderList.addItem("Carlsberg  12/09/15 12:00")
 
 #TextBoxes
 
 		quantityTextBox = QtGui.QLineEdit(self)
 		quantityTextBox.move(0, 280)
 		quantityTextBox.setText("0")
-		quantityTextBox.setFixedWidth(228)
-		quantityTextBox.setStyleSheet("color : white;"
-		                              "background:rgb(0,104,95)")
+		quantityTextBox.setFixedWidth(self.orderList.width())
+		quantityTextBox.setStyleSheet(mainStyle)
 
 
 #Time and Date Selection
@@ -93,11 +94,13 @@ class interface(QtGui.QWidget):
 		hourSelect.move(270, 70)
 		hourSelect.setStyleSheet(mainStyle)
 		hourSelect.setFixedWidth(150)
+
 		for hour in range(0, 23):
 			hourSelect.addItem(str(hour).zfill(2) + ":00")
 
 		datePicker = QtGui.QCalendarWidget(self)
-		datePicker.move(228, 150)
+		xpos = self.productList.geometry().right() + 10
+		datePicker.move(xpos, 150)
 		datePicker.setHorizontalHeaderFormat(0)
 		datePicker.setVerticalHeaderFormat(0)
 		datePicker.setGridVisible(1)
@@ -105,9 +108,8 @@ class interface(QtGui.QWidget):
 
 #Set Interface size and title
 
-		self.setGeometry(50, 50, 683, 384)
-		self.setWindowTitle('UI Test')
-		self.show()
+		# self.setGeometry(50, 50, 683, 384)
+		self.setWindowTitle('Brewery Scheduling')
 
 
 	# Lines
@@ -123,9 +125,15 @@ class interface(QtGui.QWidget):
 
 		qp.setPen(pen)
 		pen.setWidth(2)
-		qp.drawLine(0, 22, 683, 22)
-		qp.drawLine(self.width() / 3, 22, self.width() / 3, self.height())
-		qp.drawLine(self.width() / 3 * 2 + 5, 22, self.width() / 3 * 2 + 5, self.height())
+
+		topLineYpos = self.newOrderBtn.geometry().bottom() + 3
+		qp.drawLine(0, topLineYpos, self.width(), topLineYpos)
+
+		leftLineYpos = self.productList.geometry().right() + 4
+		qp.drawLine(leftLineYpos, topLineYpos, leftLineYpos, self.height())
+
+		rightLineYpos = self.orderList.geometry().left() - 3
+		qp.drawLine(rightLineYpos, topLineYpos, rightLineYpos, self.height())
 
 	def submitProduct(self):
 		print("submitting")
@@ -139,9 +147,11 @@ class interface(QtGui.QWidget):
 	def remove(self):
 		print("removing")
 
+
 def startGUI():
 	app = QtGui.QApplication(sys.argv)
 	ex = interface()
+	ex.show()
 	sys.exit(app.exec_())
 
 

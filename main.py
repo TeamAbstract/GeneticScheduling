@@ -8,7 +8,7 @@ from fitnessTest import FitnessTest
 from vessels import Vessels
 from logger import *
 
-from GUIfirstpass import startGUI
+from GUI import startGUI
 
 
 startTime = datetime.now()
