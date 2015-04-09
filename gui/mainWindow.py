@@ -1,9 +1,7 @@
 import productList
-
-from PyQt4.QtCore import Qt
-
 from gui.gui import *
 
+from gui.schedulingWindow import SchedulingWindow
 
 class MainWindow(QtGui.QWidget):
 	def __init__(self):
@@ -109,6 +107,8 @@ class MainWindow(QtGui.QWidget):
 
 	def schedule(self):
 		print("scheduling")
+		sWin.show()
+		mWIn.close()
 
 	def remove(self):
 		for x in reversed(range(self.orderList.count())):
@@ -117,9 +117,11 @@ class MainWindow(QtGui.QWidget):
 			if item.isSelected():
 				self.orderList.takeItem(x)
 
+mWIn = MainWindow()
+sWin = SchedulingWindow()
+
 
 def startGUI():
-	mWIn = MainWindow()
 	mWIn.show()
 	app.exec_()
 

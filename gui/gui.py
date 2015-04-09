@@ -1,4 +1,5 @@
 from PyQt4 import QtCore, QtGui
+from PyQt4.QtCore import Qt
 import sys
 
 
@@ -10,7 +11,8 @@ class CustomButton(QtGui.QPushButton):
 	def __init__(self, text, pos, instance, function=None):
 		super().__init__(text, instance)
 		self.resize(self.sizeHint())
-		self.move(pos[0], pos[1])
+		if pos is not None:
+			self.move(pos[0], pos[1])
 		self.setStyleSheet(mainStyle)
 
 		if function is not None:
