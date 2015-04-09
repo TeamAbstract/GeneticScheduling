@@ -1,7 +1,7 @@
 import unittest
 
 from schedule.schedule import Schedule
-from mutator import Mutator
+from genetics.mutator import Mutator
 
 
 class MutatorTests(unittest.TestCase):

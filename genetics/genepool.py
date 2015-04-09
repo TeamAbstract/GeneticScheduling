@@ -1,5 +1,5 @@
 from schedule import Schedule
-from mutator import Mutator
+from genetics.mutator import Mutator
 
 
 class GenePool:

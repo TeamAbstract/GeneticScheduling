@@ -1,29 +1,20 @@
 from datetime import *
 
-from generator import Generator
-from genepool import GenePool
-from fitnessTest import FitnessTest
+from genetics.generator import Generator
+from genetics.genepool import GenePool
+from genetics.fitnessTest import FitnessTest
 from vessels import Vessels
 from gui.GUI import startGUI
 
-
-startTime = datetime.now()
 
 vessels = Vessels()
 vessels.addVessel(20)
 vessels.addVessel(30)
 vessels.addVessel(50)
 
-# saveHigh('\nlots of issu94des')
-# saveHigh('\nlots of other iss7ues')
-# saveHigh('\nlots of other iss6ues')
-# saveHigh('\nlots of other iss5ues')
-# saveHigh('\nlots of other iss1ues')
-# saveHigh('\nlots of other issu2es')
-# saveHigh('\nlots of other issu3es')
-# saveHigh('\nlots of other issu4es')
-
 startGUI()
+
+startTime = datetime.now()
 
 generator = Generator()
 

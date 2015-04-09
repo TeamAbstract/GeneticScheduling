@@ -1,10 +1,10 @@
-from genepool import GenePool
+from datetime import datetime as DateTime
+
+from genetics.genepool import GenePool
 from vessels import Vessels
 from schedule import Schedule
-
 import util
 import settings
-from datetime import datetime as DateTime
 
 
 class FitnessTest:

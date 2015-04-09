@@ -1,12 +1,22 @@
 def saveHigh(whatyouwant):
-    highSave = open('HighPriorityIssues.txt', 'a')
-    highSave.write(whatyouwant)
-    highSave.close()
+	file = open('HighPriorityIssues.txt', 'a')
+	file.write(formatError(whatyouwant))
+	file.close()
 
 
-def saveMedium():
-    mediumSave = open('MediumPriorityIssues.txt', 'a')
+def saveMedium(whatyouwant):
+	file = open('MediumPriorityIssues.txt', 'a')
+	file.write(formatError(whatyouwant))
+	file.close()
 
 
-def saveLow():
-    lowSave = open('LowPriorityIssues.txt', 'a')
+def saveLow(whatyouwant):
+	file = open('LowPriorityIssues.txt', 'a')
+	file.write(formatError(whatyouwant))
+	file.close()
+
+
+def formatError(input):
+	if not isinstance(input, str):
+		return repr(input)
+	return input

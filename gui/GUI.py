@@ -168,12 +168,11 @@ class interface(QtGui.QWidget):
 				self.orderList.takeItem(x)
 
 
-
 def startGUI():
 	app = QtGui.QApplication(sys.argv)
 	ex = interface()
 	ex.show()
-	sys.exit(app.exec_())
+	app.exec_()
 
 
 if __name__ == '__main__':
