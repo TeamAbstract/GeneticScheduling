@@ -4,7 +4,7 @@ from genetics.generator import Generator
 from genetics.genepool import GenePool
 from genetics.fitnessTest import FitnessTest
 from vessels import Vessels
-from gui.GUI import startGUI
+from gui.mainWindow import startGUI
 
 
 vessels = Vessels()
