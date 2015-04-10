@@ -1,7 +1,13 @@
 import productList
-from gui.gui import *
+from gui.guiLib import *
 
 from gui.schedulingWindow import SchedulingWindow
+
+import genetics.controller
+import genetics.generator
+
+import threading
+
 
 class MainWindow(QtGui.QWidget):
 	def __init__(self):
@@ -9,7 +15,7 @@ class MainWindow(QtGui.QWidget):
 		self.initUI()
 
 	def initUI(self):
-		self.setStyleSheet("background:rgb(0,104,95);")
+		self.setStyleSheet("background:rgb(0,104,95); color:white;")
 
 # Buttons
 		self.newOrderBtn = CustomButton('New Order', (0, 0), self, self.newOrder)
@@ -96,7 +102,7 @@ class MainWindow(QtGui.QWidget):
 		quantity = int(self.quantityTextBox.text())
 		for productIndex in self.productList.selectedItems():
 			product = productList.getByName(productIndex.text())
-			line = product.name + " " + str(quantity) + " barrels " + str(product.brewTime) + " hours"
+			line = product.name + "-" + str(quantity) + " barrels-" + str(product.brewTime) + " hours"
 			self.orderList.addItem(line)
 
 	def newOrder(self):
@@ -106,7 +112,25 @@ class MainWindow(QtGui.QWidget):
 			self.orderList.takeItem(x)
 
 	def schedule(self):
-		print("scheduling")
+		if self.orderList.count() == 0:
+			show_message_box("No orders added", self)
+			return
+
+		items = []
+		for x in range(self.orderList.count()):
+			# taken from qt order list so has to be formatted
+			item = self.orderList.item(x)
+			if item is None:
+				continue
+			name = item.text().split("-")
+			amount = int(name[1].split(" ")[0])
+
+			assert isinstance(amount, int), "amount must be integer not " + str(type(amount))
+			items.append([productList.getByName(name[0]), amount])
+
+		schedule = genetics.generator.getNewScheduleFromList(items)
+		genetics.controller.addSchedule(schedule)
+
 		sWin.show()
 		mWIn.close()
 

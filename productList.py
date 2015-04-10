@@ -8,7 +8,9 @@ masterProductList = [
 	Product("Beer", "4", 60)]
 
 
-def getByName(name):
+def getByName(search):
+	assert isinstance(search, str), "search term is type" + str(type(search)) + str(search)
 	for item in masterProductList:
-		if item.name == name:
+		if item.name == search:
 			return item
+	raise RuntimeError("Product name, " + search + " not found (productList.getByName)")

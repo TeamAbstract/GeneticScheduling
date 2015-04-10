@@ -1,14 +1,77 @@
-from gui.gui import *
+from PyQt4 import QtGui, QtCore
+import genetics.controller as controller
+from gui.guiLib import *
+from schedule.schedule import Schedule
 
 
 class SchedulingWindow(QtGui.QWidget):
+	updateSignal = QtCore.pyqtSignal()
+
 	def __init__(self):
 		super(SchedulingWindow, self).__init__()
-		self.initUI()
 
-	def initUI(self):
-		self.setStyleSheet(mainStyle)
+		self.bestSchedule = None
 
-		self.stopBtn = CustomButton("Stop", None, self)
+		self.updateSignal.connect(self.updateGUIWithValues)
 
-		self.layout = QtGui.QGridLayout(self.stopBtn)
+		self.setStyleSheet("background:rgb(0,104,95); color:white;")
+
+		self.stopBtn = CustomButton("Stop", (0, 50), self)
+		self.startBtn = CustomButton("Start", (0, 50), self, self.onStartButtonClicked)
+		self.progressLabel = CustomLabel("Current fitness", None, self)
+		self.progressText = CustomLabel("0", None, self)
+		self.progressBar = CustomProgressBar(None, self)
+
+		self.targetLabel = CustomLabel("Target fitness", None, self)
+		self.targetSpinBox = CustomSpinBox(None, self)
+		self.targetSpinBox.setValue(80)
+
+
+		self.layout = QtGui.QGridLayout()
+
+		self.targetSpinBox.connect(self, QtCore.SIGNAL("clicked()"), self.onSpinBoxClick)
+
+		# row 0
+		self.layout.addWidget(self.stopBtn, 0, 0)
+		self.layout.addWidget(self.startBtn, 0, 1)
+
+		# row 1
+		self.layout.addWidget(self.progressLabel, 1, 0)
+		self.layout.addWidget(self.progressText, 1, 1)
+
+		# row 2
+		self.layout.addWidget(self.targetLabel, 2, 0)
+		self.layout.addWidget(self.targetSpinBox, 2, 1)
+
+		# row 3
+		self.layout.addWidget(self.progressBar, 3, 0, 3, 1)
+
+		self.setLayout(self.layout)
+
+	def setSchedule(self, schedule):
+		assert isinstance(schedule, Schedule)
+		controller.genepool.addSchedule(schedule)
+
+	def onSpinBoxClick(self):
+		self.progressBar.setMaximum(self.targetSpinBox.value())
+
+	def onStartButtonClicked(self):
+		self.thread = self.ProcessingThread()
+		self.thread.giveInstance(self)
+		self.thread.start()
+
+	def updateGUIWithValues(self):
+		self.progressBar.setMaximum(self.targetSpinBox.value())
+		self.progressText.setText(str(round(self.bestSchedule.fitness, 2)))
+		self.progressBar.setValue(int(self.bestSchedule.fitness))
+
+	class ProcessingThread(QtCore.QThread):
+		def giveInstance(self, instance):
+			self.guiInstance = instance
+
+		def run(self):
+			while controller.genepool.getBestSchedule().fitness < self.guiInstance.targetSpinBox.value():
+				controller.tick()
+				self.guiInstance.updateSignal.emit()
+				self.guiInstance.bestSchedule = controller.genepool.getBestSchedule()
+
