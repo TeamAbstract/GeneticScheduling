@@ -17,7 +17,7 @@ class SchedulingWindow(QtGui.QWidget):
 
 		self.setStyleSheet("background:rgb(0,104,95); color:white;")
 
-		self.stopBtn = CustomButton("Stop", (0, 50), self)
+		self.stopBtn = CustomButton("Stop", (0, 50), self, self.onStopButtonClicked)
 		self.startBtn = CustomButton("Start", (0, 50), self, self.onStartButtonClicked)
 		self.progressLabel = CustomLabel("Current fitness", None, self)
 		self.progressText = CustomLabel("0", None, self)
@@ -66,6 +66,9 @@ class SchedulingWindow(QtGui.QWidget):
 		self.thread.giveInstance(self)
 		self.thread.start()
 
+	def onStopButtonClicked(self):
+		controller.running = False
+
 	def updateGUIWithValues(self):
 		self.progressBar.setMaximum(self.targetSpinBox.value())
 		self.progressText.setText(str(round(self.bestSchedule.fitness, 2)))
@@ -74,15 +77,20 @@ class SchedulingWindow(QtGui.QWidget):
 		self.schedule.clear()
 		if self.bestSchedule is not None:
 			for task in self.bestSchedule.tasks:
-				self.schedule.addItem(task.product.name + " " + str(task.startTime) + " " + str(task.getDuration()) + " " + str(task.cleanTime))
+				self.schedule.addItem(str(task))
 
 	class ProcessingThread(QtCore.QThread):
 		def giveInstance(self, instance):
+			self.updateCounter = 0
 			self.guiInstance = instance
 
 		def run(self):
-			while controller.genepool.getBestSchedule().fitness < self.guiInstance.targetSpinBox.value():
+			while controller.genepool.getBestSchedule().fitness < self.guiInstance.targetSpinBox.value() and controller.running:
 				controller.tick()
-				self.guiInstance.updateSignal.emit()
+				self.updateCounter += 1
+				# only update every 5th time
+				# more frequent updates freeze the gui
+				if self.updateCounter % 5 == 0:
+					self.guiInstance.updateSignal.emit()
 				self.guiInstance.bestSchedule = controller.genepool.getBestSchedule()
 
