@@ -2,6 +2,7 @@ from PyQt4 import QtGui, QtCore
 import genetics.controller as controller
 from gui.guiLib import *
 from schedule.schedule import Schedule
+from gui.scheduleRenderer import ScheduleRenderer
 
 
 class SchedulingWindow(QtGui.QWidget):
@@ -21,6 +22,8 @@ class SchedulingWindow(QtGui.QWidget):
 		self.progressLabel = CustomLabel("Current fitness", None, self)
 		self.progressText = CustomLabel("0", None, self)
 		self.progressBar = CustomProgressBar(None, self)
+
+		self.schedule = ScheduleRenderer(self)
 
 		self.targetLabel = CustomLabel("Target fitness", None, self)
 		self.targetSpinBox = CustomSpinBox(None, self)
@@ -44,7 +47,10 @@ class SchedulingWindow(QtGui.QWidget):
 		self.layout.addWidget(self.targetSpinBox, 2, 1)
 
 		# row 3
-		self.layout.addWidget(self.progressBar, 3, 0, 3, 1)
+		self.layout.addWidget(self.schedule)
+
+		# row 4
+		self.layout.addWidget(self.progressBar, 4, 0, 3, 1)
 
 		self.setLayout(self.layout)
 
@@ -64,6 +70,11 @@ class SchedulingWindow(QtGui.QWidget):
 		self.progressBar.setMaximum(self.targetSpinBox.value())
 		self.progressText.setText(str(round(self.bestSchedule.fitness, 2)))
 		self.progressBar.setValue(int(self.bestSchedule.fitness))
+
+		self.schedule.clear()
+		if self.bestSchedule is not None:
+			for task in self.bestSchedule.tasks:
+				self.schedule.addItem(task.product.name + " " + str(task.startTime) + " " + str(task.getDuration()) + " " + str(task.cleanTime))
 
 	class ProcessingThread(QtCore.QThread):
 		def giveInstance(self, instance):
