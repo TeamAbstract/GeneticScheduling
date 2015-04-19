@@ -53,4 +53,4 @@ class Task:
 		print("   in vessels", str(self.vessel.id), "(" + str(self.vessel.size) + " kegs)")
 
 	def __repr__(self):
-		return self.product.name + " " + str(self.startTime) + "-" + str(self.getDuration())
+		return self.product.name + " " + str(self.startTime) + "-" + str(self.getDuration()) + " " + str(self.volume) + "kegs"

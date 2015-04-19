@@ -39,7 +39,7 @@ class FitnessTest:
 		"""
 		# print("Testing schedule ", schedule.id)
 
-		fitness = 100.0
+		fitness = 0
 
 		schedule.flags = set()
 
