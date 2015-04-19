@@ -1,10 +1,10 @@
-from datetime import datetime as DateTime
-
-from genetics.genepool import GenePool
+from genepool import GenePool
 from vessels import Vessels
 from schedule import Schedule
+
 import util
 import settings
+from datetime import datetime as DateTime
 
 
 class FitnessTest:
@@ -39,7 +39,7 @@ class FitnessTest:
 		"""
 		# print("Testing schedule ", schedule.id)
 
-		fitness = 0
+		fitness = 100.0
 
 		schedule.flags = set()
 

@@ -19,10 +19,11 @@ class Task:
 		else:
 			self.volume = volume
 
-		self.cleanTime = util.getTimeDeltaObject("1")
+		self.cleanTime = util.getTimeObject("1")
 
 		if startTime is None:
 			startTime = datetime.datetime.now()
+			assert isinstance(startTime, DateTime)
 			startTime = startTime.replace(second=0, microsecond=0)
 
 		if isinstance(startTime, DateTime):
@@ -35,22 +36,28 @@ class Task:
 		assert isinstance(vessel, Vessel)
 		self.vessel = vessel
 
+	def setDate(self, date):
+		"""
+		:param date: datetime date object or a string
+		:return: None
+		"""
+		if isinstance(date, datetime.date):
+			self.startTime = date
+		elif isinstance(date, str):
+			self.startTime = datetime.date(date)
+		else:
+			raise TypeError("setDate requires a datetime.datetime object or a string not", type(date))
+
 	def getEndTime(self):
-		"""!
+		"""
 		Adds the duration to the time to get the finish time
 		:return: datetime.time for when the task finishes
 		"""
-		return self.startTime + self.product.brewTime
-
-	def getDuration(self):
-		"""! gets total time for process (brewing + cleaning)
-		:return: datetime object
-		"""
-		return self.cleanTime + self.product.brewTime
+		return util.addDateTimeAndTime(self.startTime, self.product.brewTime)
 
 	def print(self):
 		print("  ", self.startTime, " ", self.product.brewTime, "+", self.cleanTime, " ", self.volume, "kegs")
 		print("   in vessels", str(self.vessel.id), "(" + str(self.vessel.size) + " kegs)")
 
 	def __repr__(self):
-		return self.product.name + " " + str(self.startTime) + "-" + str(self.getDuration()) + " " + str(self.volume) + "kegs"
+		return self.product.name + " " + self.startTime
