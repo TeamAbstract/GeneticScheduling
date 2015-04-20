@@ -5,6 +5,8 @@ import util
 
 from copy import deepcopy
 
+from decimal import *
+
 
 class Schedule:
 	"""!
@@ -23,7 +25,7 @@ class Schedule:
 		return currentID
 
 	def __init__(self):
-		self.fitness = 0.0
+		self.fitness = Decimal(0)
 		self.tasks = []
 
 		self.id = Schedule.getNextID()

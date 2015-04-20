@@ -43,6 +43,9 @@ class Vessels:
 			choice = random.randint(choice, len(Vessels.vessels)-1)
 			vessel = Vessels.vessels[choice]
 
+	def __repr__(self):
+		return "Vessel " + self.id
+
 
 class Vessel():
 	"""! internal representation of a vessel

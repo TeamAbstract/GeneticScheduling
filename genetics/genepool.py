@@ -1,5 +1,7 @@
 from schedule import Schedule
-from mutator import Mutator
+from genetics.mutator import Mutator
+
+import random
 
 
 class GenePool:
@@ -43,7 +45,8 @@ class GenePool:
 		# print("Refreshing pool contains ", len(self.schedules), "/", GenePool.maxNumOfSchedules)
 
 		while len(self.schedules) < GenePool.maxNumOfSchedules:
-			self.schedules.append(Mutator.mutateSchedule(self.schedules[0]))  # this should mutate the schedule and add it to the end of a list
+			num = random.randint(0, len(self.schedules)-1)
+			self.schedules.append(Mutator.mutateSchedule(self.schedules[num]))  # this should mutate the schedule and add it to the end of a list
 		self.sorted = False
 
 	def getBestSchedule(self):
@@ -51,8 +54,13 @@ class GenePool:
 		:return: highest rated schedule
 		:rtype: Schedule
 		"""
-		self.sortPool()
-		return self.schedules[0]
+		best = None
+		assert len(self.schedules) > 0
+		for schedule in self.schedules:
+			if best is None or schedule.fitness > best.fitness:
+				best = schedule
+
+		return best
 
 	def sortPool(self):
 		"""! sorts the pool if unsorted for optimisation"""

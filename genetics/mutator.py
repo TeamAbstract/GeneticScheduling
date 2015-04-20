@@ -60,7 +60,5 @@ class Mutator:
 		# change start time
 		if randint(0, 100) <= Mutator.percentageChange:
 			task.startTime = task.startTime + util.getTimeDeltaObject(str(randint(-12, 12)))
-			while not settings.openingTime < task.startTime.time() < util.addTimeAndTimeDelta(settings.closingTime, task.getDuration()):
-				task.startTime = task.startTime + util.getTimeDeltaObject(str(randint(-12, 12)))
 
 			# print("Added ", hoursAdded, " hours to task", task.product.name)

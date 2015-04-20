@@ -1,10 +1,10 @@
-from genepool import GenePool
+from datetime import datetime as DateTime
+
+from genetics.genepool import GenePool
 from vessels import Vessels
 from schedule import Schedule
-
 import util
 import settings
-from datetime import datetime as DateTime
 
 
 class FitnessTest:
@@ -14,8 +14,10 @@ class FitnessTest:
 	penaltyPerHourOverlapping = -5
 	penaltyPerHourIdle = -2
 	totalTimeWeight = -1
-	penaltyForOutOfHours = -20
+	penaltyForOutOfHours = -10
 	percentageTimeUsedWeight = 5
+
+	startTime = DateTime.now()
 
 	@staticmethod
 	def testPool(genepool):
@@ -39,7 +41,7 @@ class FitnessTest:
 		"""
 		# print("Testing schedule ", schedule.id)
 
-		fitness = 100.0
+		fitness = 100
 
 		schedule.flags = set()
 
@@ -136,12 +138,8 @@ class FitnessTest:
 				lastTask = task
 
 		totalTime = util.getTotalHours(schedule.getTotalTime())/len(Vessels.vessels)
-		timeToEnd = util.getTotalHours(lastTask.getEndTime() - DateTime.now())
+		timeToEnd = util.getTotalHours(lastTask.getEndTime() - FitnessTest.startTime)
 		return (timeToEnd/totalTime) * FitnessTest.percentageTimeUsedWeight
-
-
-
-
 
 	@staticmethod
 	def testOutOfHours(schedule):
